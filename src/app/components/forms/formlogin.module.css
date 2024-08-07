@@ -38,23 +38,3 @@
 .form input[type=submit]:active {
     background-color: blue;
 }
-
-.divpass {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.divpass button {
-    position: absolute;
-    right: -22px;
-    display: flex;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.iconpasson {
-    width: 20px;
-    height: 20px;
-}
