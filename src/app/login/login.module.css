@@ -1,4 +1,14 @@
-.section {
+.main {
+    max-width: 1440px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+.main section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,11 +26,7 @@
 }
 
 @media (max-width: 900px) {
-    .section {
-        padding: 40px;
-    }
-
-    .section h1 {
+    .main h1 {
         font-size: 1rem;
     }
 

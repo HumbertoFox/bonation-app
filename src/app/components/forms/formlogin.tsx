@@ -1,7 +1,7 @@
 'use client';
 import styles from './formlogin.module.css';
 
-export const FormLogin = () => {
+export default function FormLogin() {
 
     return (
         <form className={styles.form}>
