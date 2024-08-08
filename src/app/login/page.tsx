@@ -1,6 +1,7 @@
 'use client';
 import FormLogin from '@/app/components/forms/formlogin';
-import { UserCheck } from 'react-feather';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCheck } from '@fortawesome/free-solid-svg-icons';
 import styles from './login.module.css';
 
 export default function LoginPage() {
@@ -8,7 +9,7 @@ export default function LoginPage() {
         <main className={styles.main}>
             <section>
                 <h1>Usuário do Sistema</h1>
-                <UserCheck className={styles.user} />
+                <FontAwesomeIcon className={styles.user} icon={faUserCheck} />
                 <FormLogin />
             </section>
         </main>
