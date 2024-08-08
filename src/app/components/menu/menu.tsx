@@ -1,3 +1,6 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './menu.module.css';
@@ -6,6 +9,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faUserPlus, faSquarePen, faUserPen, faCalendarPlus, faCalendarCheck, faCalendarDays, faFileCircleCheck, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
+    const [navMenuLink, setNavMenuLink] = useState('');
+    const navigate = useRouter();
+    const handlesMenuLinkClick = (element: string) => {
+        setNavMenuLink(element);
+        localStorage.setItem('activeMenuLinkSelection', element);
+    };
+    useEffect(() => {
+        const activeMenuLinkSelection = localStorage.getItem('activeMenuLinkSelection');
+        if (activeMenuLinkSelection != null) {
+            setNavMenuLink(activeMenuLinkSelection);
+            if (activeMenuLinkSelection == 'Cadastrar Doação') {
+                navigate.push('/CadastroDoacao');
+            } else if (activeMenuLinkSelection == 'Cadastrar Doador') {
+                navigate.push('/CadastroDoador');
+            } else if (activeMenuLinkSelection == 'Editar Doação') {
+                navigate.push('/EditaDoacao');
+            } else if (activeMenuLinkSelection == 'Editar Doador') {
+                navigate.push('/EditaDoador');
+            } else if (activeMenuLinkSelection == 'Agendar Coleta') {
+                navigate.push('/AgendarColeta');
+            } else if (activeMenuLinkSelection == 'Confirmar Coleta') {
+                navigate.push('/ConfirmColeta');
+            } else if (activeMenuLinkSelection == 'Relatório') {
+                navigate.push('/Relatorio');
+            };
+        } else {
+            setNavMenuLink('/Agenda');
+        };
+    }, [navigate]);
     return (
         <div className={styles.section}>
             <Link className={styles.linkimg} href={'/login'}>
@@ -13,55 +45,55 @@ export default function Menu() {
             </Link>
             <nav>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Cadastrar Doação' href={'/CadastroDoacao'} className={navMenuLink === 'Cadastrar Doação' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doação')}>
                         <FontAwesomeIcon icon={faPenToSquare} />
                         <span>Cadastrar Doação</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Cadastrar Doador' href={'/CadastroDoador'} className={navMenuLink === 'Cadastrar Doador' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doador')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPlus} />
                         <span>Cadastrar Doador</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Editar Doação' href={'/EditaDoacao'} className={navMenuLink === 'Editar Doação' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Editar Doação')}>
                         <FontAwesomeIcon icon={faSquarePen} />
                         <span>Editar Doação</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Editar Doador' href={'/EditaDoador'} className={navMenuLink === 'Editar Doador' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Editar Doador')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPen} />
                         <span>Editar Doador</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Agendar Coleta' href={'/AgendarColeta'} className={navMenuLink == 'Confirmar Coleta' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Agendar Coleta')}>
                         <FontAwesomeIcon icon={faCalendarPlus} />
                         <span>Agendar Coleta</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Confirmar Coleta' href={'/ConfirmColeta'} className={navMenuLink == 'Confirmar Coleta' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Confirmar Coleta')}>
                         <FontAwesomeIcon icon={faCalendarCheck} />
                         <span>Confirmar Coleta</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Relatório' href={'/Relatorio'} className={navMenuLink == 'Relatório' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Relatório')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faFileCircleCheck} />
                         <span>Relatório</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link title='Agenda' href={'/Agenda'} className={navMenuLink == 'Agenda' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Agenda')}>
                         <FontAwesomeIcon icon={faCalendarDays} />
                         <span>Agenda</span>
                     </Link>
                 </div>
                 <div>
-                    <Link href={'/'}>
+                    <Link href={'/login'}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faRightToBracket} />
                         <span>Sair do Sistema</span>
                     </Link>
