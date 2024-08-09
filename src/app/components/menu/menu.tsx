@@ -37,6 +37,7 @@ export default function Menu() {
             };
         } else {
             setNavMenuLink('RegisterDonation');
+            navigate.push('/registerdonation');
         };
     }, [navigate]);
     return (
