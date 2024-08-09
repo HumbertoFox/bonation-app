@@ -15,12 +15,13 @@ export default function Menu() {
         setNavMenuLink(element);
         localStorage.setItem('activeMenuLinkSelection', element);
     };
+
     useEffect(() => {
         const activeMenuLinkSelection = localStorage.getItem('activeMenuLinkSelection');
         if (activeMenuLinkSelection != null) {
             setNavMenuLink(activeMenuLinkSelection);
-            if (activeMenuLinkSelection == 'Cadastrar Doação') {
-                navigate.push('/CadastroDoacao');
+            if (activeMenuLinkSelection == 'RegisterDonation') {
+                navigate.push('/registerdonation');
             } else if (activeMenuLinkSelection == 'Cadastrar Doador') {
                 navigate.push('/CadastroDoador');
             } else if (activeMenuLinkSelection == 'Editar Doação') {
@@ -45,49 +46,49 @@ export default function Menu() {
             </Link>
             <nav>
                 <div>
-                    <Link title='Cadastrar Doação' href={'/CadastroDoacao'} className={navMenuLink === 'Cadastrar Doação' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doação')}>
+                    <Link title='Cadastrar Doação' href={'/registerdonation'} className={navMenuLink == 'RegisterDonation' ? styles.active : ''} onClick={() => handlesMenuLinkClick('RegisterDonation')}>
                         <FontAwesomeIcon icon={faPenToSquare} />
                         <span>Cadastrar Doação</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Cadastrar Doador' href={'/CadastroDoador'} className={navMenuLink === 'Cadastrar Doador' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doador')}>
+                    <Link title='Cadastrar Doador' href={'/registerdonation'} className={navMenuLink == 'Cadastrar Doador' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doador')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPlus} />
                         <span>Cadastrar Doador</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Editar Doação' href={'/EditaDoacao'} className={navMenuLink === 'Editar Doação' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Editar Doação')}>
+                    <Link title='Editar Doação' href={'/EditaDoacao'} className={navMenuLink == 'Editar Doação' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Editar Doação')}>
                         <FontAwesomeIcon icon={faSquarePen} />
                         <span>Editar Doação</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Editar Doador' href={'/EditaDoador'} className={navMenuLink === 'Editar Doador' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Editar Doador')}>
+                    <Link title='Editar Doador' href={'/EditaDoador'} className={navMenuLink == 'Editar Doador' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Editar Doador')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPen} />
                         <span>Editar Doador</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Agendar Coleta' href={'/AgendarColeta'} className={navMenuLink == 'Confirmar Coleta' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Agendar Coleta')}>
+                    <Link title='Agendar Coleta' href={'/AgendarColeta'} className={navMenuLink == 'Confirmar Coleta' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Agendar Coleta')}>
                         <FontAwesomeIcon icon={faCalendarPlus} />
                         <span>Agendar Coleta</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Confirmar Coleta' href={'/ConfirmColeta'} className={navMenuLink == 'Confirmar Coleta' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Confirmar Coleta')}>
+                    <Link title='Confirmar Coleta' href={'/ConfirmColeta'} className={navMenuLink == 'Confirmar Coleta' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Confirmar Coleta')}>
                         <FontAwesomeIcon icon={faCalendarCheck} />
                         <span>Confirmar Coleta</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Relatório' href={'/Relatorio'} className={navMenuLink == 'Relatório' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Relatório')}>
+                    <Link title='Relatório' href={'/Relatorio'} className={navMenuLink == 'Relatório' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Relatório')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faFileCircleCheck} />
                         <span>Relatório</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Agenda' href={'/Agenda'} className={navMenuLink == 'Agenda' ? 'styles.active' : ''} onClick={() => handlesMenuLinkClick('Agenda')}>
+                    <Link title='Agenda' href={'/Agenda'} className={navMenuLink == 'Agenda' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Agenda')}>
                         <FontAwesomeIcon icon={faCalendarDays} />
                         <span>Agenda</span>
                     </Link>

@@ -1,0 +1,230 @@
+.formlogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formlogin input[type=text],
+.formlogin input[type=password] {
+    border: none;
+    background-color: #E7E7E7;
+    border-radius: 5px;
+    padding: 5px 5px 5px 10px;
+}
+
+.formlogin input[type=text]::placeholder,
+.formlogin input[type=password]::placeholder {
+    font-weight: bold;
+}
+
+.formlogin input[type=submit] {
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+    background-color: blue;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .4s ease-in-out;
+}
+
+.formlogin input[type=submit]:hover {
+    background-color: cornflowerblue
+}
+
+.formlogin input[type=submit]:active {
+    background-color: blue;
+}
+
+.divpass {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.divpass button {
+    position: absolute;
+    right: -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.divcods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.iconpasson {
+    width: 20px;
+    height: 20px;
+}
+
+.formdonation {
+    max-width: 790px;
+    display: flex;
+    flex-direction: column;
+    font-size: .77rem;
+    transition: all .4s ease-in-out;
+}
+
+.formdonation legend {
+    text-align: center;
+    text-shadow: 1px 1px 0.5px #AAF998;
+    padding-bottom: 5px;
+    transition: all .4s ease-in-out;
+}
+
+.formdonation label {
+    color: grey;
+    padding-left: 5px;
+}
+
+.formdonation input[type=text] {
+    max-width: 280px;
+    height: 30px;
+    font-size: 15px;
+    border: 1px solid #D2D4DE;
+    border-radius: 5px;
+    padding: 0 5px;
+    outline: none;
+    margin-bottom: 5px;
+    transition: .3s ease-in-out;
+}
+
+.formdonation input[type=text]:focus,
+.formdonation textarea:focus {
+    border: 1px solid hsla(205.46, 86.5%, 46.47%, .5);
+    box-shadow: 0 0 5px hsla(205.46, 86.5%, 46.47%, .5);
+}
+
+.formdonation textarea {
+    width: 780px;
+    height: 70px;
+    font-size: 15px;
+    border: 1px solid #D2D4DE;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    margin-bottom: 5px;
+    transition: .3s ease-in-out;
+}
+
+.formdonation input[type=search]:focus {
+    border: 1px solid hsla(205.46, 86.5%, 46.47%, .5);
+    box-shadow: 0 0 5px hsla(205.46, 86.5%, 46.47%, .5);
+}
+
+.formdonation input.required:focus {
+    border: 1px solid hsla(332.47, 100%, 50%, .5);
+    box-shadow: 0 0 5px hsla(332.47, 100%, 50%, .5);
+}
+
+.formdonation input.required {
+    border: 1px solid hsla(332.47, 100%, 50%, .5);
+    background: url(../../../assets/ponto-de-exclamacao.png) right 2% bottom 50% no-repeat;
+    background-size: 20px;
+}
+
+.formdonation .required::placeholder {
+    font-style: italic;
+    color: hsla(332.47, 100%, 50%, .5);
+}
+
+.divobjprimary {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    transition: .3s ease-in-out;
+}
+
+.divobjqtd {
+    display: flex;
+    gap: 5px;
+    transition: .3s ease-in-out;
+}
+
+.divobj {
+    display: flex;
+    flex-direction: column;
+    transition: .3s ease-in-out;
+}
+
+.divobj input[type=text] {
+    width: 230px;
+}
+
+.divqtd {
+    display: flex;
+    flex-direction: column;
+    transition: .3s ease-in-out;
+}
+
+.divqtd input[type="text"] {
+    width: 150px;
+    transition: .3s ease-in-out;
+}
+
+.divbtn {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.inputsubmit {
+    background-color: #AAF998;
+    border-radius: 5px;
+    text-shadow: 1px 1px 0.5px #79D1FF;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+
+.inputsubmit:hover {
+    background-color: #79D1FF;
+    text-shadow: 1px 1px 0.5px #AAF998;
+}
+
+@media (max-width: 1340px) {
+    .formdonation {
+        max-width: 390px;
+    }
+
+    .formdonation textarea {
+        width: 385px;
+    }
+}
+
+@media (max-width: 480px) {
+    .formdonation {
+        width: 280px;
+    }
+
+    .formdonation textarea {
+        width: 280px;
+    }
+
+    .divobjqtd {
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .divobj,
+    .divqtd {
+        width: 100%;
+    }
+
+    .divobj input[type=text] {
+        width: 280px;
+    }
+
+    .divqtd input[type="text"] {
+        width: 100%;
+    }
+}

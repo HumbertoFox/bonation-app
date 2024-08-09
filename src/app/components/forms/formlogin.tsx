@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import styles from './formlogin.module.css';
+import styles from './forms.module.css';
 
 export default function FormLogin() {
     const [ispass, setIspass] = useState(false);
     const handlePass = () => setIspass(!ispass);
     return (
-        <form className={styles.form}>
+        <form className={styles.formlogin}>
             <input type='text' placeholder='CPF' />
             <div className={styles.divpass}>
                 <input type={ispass ? 'text' : 'password'} id='password' placeholder='Senha' />

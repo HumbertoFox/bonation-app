@@ -3,3 +3,33 @@
   min-height: 100vh;
   display: flex;
 }
+
+.divmain {
+  position: relative;
+  width: calc(100% - 200px);
+  left: 200px;
+  min-height: 100vh;
+  display: flex;
+  column-gap: 10px;
+  padding: 5px;
+  transition: .3s ease-in-out;
+}
+
+@media (max-width: 480px) {
+  .main {
+    width: 375px;
+  }
+}
+
+@media (max-width: 770px) {
+  .divmain {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1080px) {
+  .divmain {
+    width: calc(100% - 70px);
+    left: 70px;
+  }
+}
