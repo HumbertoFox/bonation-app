@@ -75,31 +75,45 @@
     transition: all .4s ease-in-out;
 }
 
-.formdonation legend {
-    text-align: center;
+.formdonation legend,
+.formdonor legend {
     text-shadow: 1px 1px 0.5px #AAF998;
     padding-bottom: 5px;
     transition: all .4s ease-in-out;
+    margin: 0 auto;
 }
 
-.formdonation label {
+.formdonation label,
+.formdonor label {
     color: grey;
     padding-left: 5px;
 }
 
-.formdonation input[type=text] {
-    max-width: 280px;
+.formdonation input[type=text],
+.formdonor input[type=text],
+.formdonor input[type="number"],
+.formdonor input[type="tel"],
+.formdonor input[type="password"],
+.formdonor textarea {
     height: 30px;
-    font-size: 15px;
     border: 1px solid #D2D4DE;
     border-radius: 5px;
     padding: 0 5px;
     outline: none;
     margin-bottom: 5px;
-    transition: .3s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.formdonation input[type=text] {
+    max-width: 280px;
 }
 
 .formdonation input[type=text]:focus,
+.formdonor input[type=text]:focus,
+.formdonor input[type="number"]:focus,
+.formdonor input[type="tel"]:focus,
+.formdonor input[type="password"]:focus,
+.formdonor textarea:focus,
 .formdonation textarea:focus {
     border: 1px solid hsla(205.46, 86.5%, 46.47%, .5);
     box-shadow: 0 0 5px hsla(205.46, 86.5%, 46.47%, .5);
@@ -108,13 +122,19 @@
 .formdonation textarea {
     width: 780px;
     height: 70px;
-    font-size: 15px;
     border: 1px solid #D2D4DE;
     border-radius: 5px;
     padding: 5px;
     outline: none;
+    resize: none;
     margin-bottom: 5px;
-    transition: .3s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.formdonor textarea {
+    height: 70px;
+    resize: none;
+    padding: 5px;
 }
 
 .formdonation input[type=search]:focus {
@@ -127,13 +147,25 @@
     box-shadow: 0 0 5px hsla(332.47, 100%, 50%, .5);
 }
 
-.formdonation input.required {
+.formdonation input.required,
+.formdonor input.required {
     border: 1px solid hsla(332.47, 100%, 50%, .5);
     background: url(../../../assets/ponto-de-exclamacao.png) right 2% bottom 50% no-repeat;
     background-size: 20px;
 }
 
-.formdonation .required::placeholder {
+.formdonor textarea.required {
+    border: 1px solid hsla(332.47, 100%, 50%, .5);
+}
+
+.formdonor input.required:focus,
+.formdonor textarea.required:focus {
+    border: 1px solid hsla(332.47, 100%, 50%, .5);
+    box-shadow: 0 0 5px hsla(332.47, 100%, 50%, .5);
+}
+
+.formdonation .required::placeholder,
+.formdonor .required::placeholder {
     font-style: italic;
     color: hsla(332.47, 100%, 50%, .5);
 }
@@ -189,6 +221,51 @@
 .inputsubmit:hover {
     background-color: #79D1FF;
     text-shadow: 1px 1px 0.5px #AAF998;
+}
+
+.formdonor {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    font-size: .77rem;
+    transition: all .4s ease-in-out;
+}
+
+.divradius {
+    display: flex;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+.divradius input[type="radio"],
+.divradius label {
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+}
+
+.divradius label {
+    padding-right: 15px;
+}
+.divradius label:hover {
+    color: hsla(205.46, 86.5%, 46.47%, .5);
+}
+
+.divcoddonor,
+.divcnpj,
+.divbuilding {
+    display: flex;
+    flex-direction: column;
+}
+
+.formdonor input::-webkit-outer-spin-button,
+.formdonor input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.formdonor fieldset {
+    display: flex;
+    flex-direction: column;
 }
 
 @media (max-width: 1340px) {

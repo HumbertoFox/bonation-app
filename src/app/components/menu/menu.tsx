@@ -22,8 +22,8 @@ export default function Menu() {
             setNavMenuLink(activeMenuLinkSelection);
             if (activeMenuLinkSelection == 'RegisterDonation') {
                 navigate.push('/registerdonation');
-            } else if (activeMenuLinkSelection == 'Cadastrar Doador') {
-                navigate.push('/CadastroDoador');
+            } else if (activeMenuLinkSelection == 'RegisterDonor') {
+                navigate.push('/registerdonor');
             } else if (activeMenuLinkSelection == 'Editar Doação') {
                 navigate.push('/EditaDoacao');
             } else if (activeMenuLinkSelection == 'Editar Doador') {
@@ -53,7 +53,7 @@ export default function Menu() {
                     </Link>
                 </div>
                 <div>
-                    <Link title='Cadastrar Doador' href={'/CadastrarDoador'} className={navMenuLink == 'Cadastrar Doador' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doador')}>
+                    <Link title='Cadastrar Doador' href={'/registerdonor'} className={navMenuLink == 'RegisterDonor' ? styles.active : ''} onClick={() => handlesMenuLinkClick('RegisterDonor')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPlus} />
                         <span>Cadastrar Doador</span>
                     </Link>
