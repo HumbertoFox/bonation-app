@@ -36,7 +36,7 @@ export default function Menu() {
                 navigate.push('/Relatorio');
             };
         } else {
-            setNavMenuLink('/Agenda');
+            setNavMenuLink('RegisterDonation');
         };
     }, [navigate]);
     return (
@@ -52,7 +52,7 @@ export default function Menu() {
                     </Link>
                 </div>
                 <div>
-                    <Link title='Cadastrar Doador' href={'/registerdonation'} className={navMenuLink == 'Cadastrar Doador' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doador')}>
+                    <Link title='Cadastrar Doador' href={'/CadastrarDoador'} className={navMenuLink == 'Cadastrar Doador' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Cadastrar Doador')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPlus} />
                         <span>Cadastrar Doador</span>
                     </Link>
