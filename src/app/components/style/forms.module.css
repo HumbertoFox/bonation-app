@@ -1,7 +1,8 @@
 .formlogin,
 .formuser,
 .formhelper,
-.formdriver {
+.formdriver,
+.formvehicle {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,11 +16,11 @@
 .formuser input[type=password],
 .formuser input[type=number],
 .formhelper input[type=text],
-.formhelper input[type=password],
 .formhelper input[type=number],
 .formdriver input[type=text],
-.formdriver input[type=password],
-.formdriver input[type=number] {
+.formdriver input[type=number],
+.formvehicle input[type=text],
+.formvehicle input[type=number] {
     border: none;
     background-color: #E7E7E7;
     border-radius: 5px;
@@ -32,11 +33,11 @@
 .formuser input[type=password]::placeholder,
 .formuser input[type=number]::placeholder,
 .formhelper input[type=text]::placeholder,
-.formhelper input[type=password]::placeholder,
 .formhelper input[type=number]::placeholder,
 .formdriver input[type=text]::placeholder,
-.formdriver input[type=password]::placeholder,
-.formdriver input[type=number]::placeholder {
+.formdriver input[type=number]::placeholder,
+.formvehicle input[type=text]::placeholder,
+.formvehicle input[type=number]::placeholder  {
     font-weight: bold;
 }
 
@@ -46,7 +47,9 @@
 .formhelper input[type=submit],
 .divbtnhelper button,
 .formdriver input[type=submit],
-.divbtndriver button  {
+.divbtndriver button,
+.formvehicle input[type=submit],
+.divbtnvehicle button {
     font-size: 1rem;
     color: white;
     font-weight: bold;
@@ -61,14 +64,24 @@
 .formlogin input[type=submit]:hover,
 .formuser input[type=submit]:hover,
 .formhelper input[type=submit]:hover,
-.formdriver input[type=submit]:hover {
+.formdriver input[type=submit]:hover,
+.formvehicle input[type=submit]:hover,
+.formuser .divbtnuser button:hover,
+.formhelper .divbtnhelper button:hover,
+.formdriver .divbtndriver button:hover,
+.formvehicle .divbtnvehicle button:hover {
     background-color: cornflowerblue
 }
 
 .formlogin input[type=submit]:active,
 .formuser input[type=submit]:active,
 .formhelper input[type=submit]:active,
-.formdriver input[type=submit]:active {
+.formdriver input[type=submit]:active,
+.formvehicle input[type=submit]:active,
+.formuser .divbtnuser button:active,
+.formhelper .divbtnhelper button:active,
+.formdriver .divbtndriver button:active,
+.formvehicle .divbtnvehicle button:active {
     background-color: blue;
 }
 
@@ -85,7 +98,8 @@
 .divbtnhelper,
 .divradiushelper,
 .divbtndriver,
-.divradiusdriver {
+.divradiusdriver,
+.divbtnvehicle {
     width: 100%;
     display: flex;
     justify-content: space-evenly;

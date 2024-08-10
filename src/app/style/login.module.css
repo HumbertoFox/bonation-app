@@ -21,7 +21,8 @@
 
 .user,
 .helper,
-.driver {
+.driver,
+.vehicle {
     width: 95px;
     height: 95px;
     color: blue;
@@ -34,7 +35,8 @@
 
     .user,
     .helper,
-    .driver {
+    .driver,
+    .vehicle {
         width: 75px;
         height: 75px;
     }
