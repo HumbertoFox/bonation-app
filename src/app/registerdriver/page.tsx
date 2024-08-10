@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIdCard } from '@fortawesome/free-solid-svg-icons';
 import FormRegisterDriver from '@/app/components/forms/formregiterdriver';
-import styles from '@/app/style/login.module.css';
+import styles from '@/app/style/pages.module.css';
 
 export default function RegisterDriverPage() {
     return (

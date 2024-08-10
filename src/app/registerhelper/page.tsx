@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonShelter } from '@fortawesome/free-solid-svg-icons';
 import FormRegisterHelper from "@/app/components/forms/formregisterhelper";
-import styles from '@/app/style/login.module.css';
+import styles from '@/app/style/pages.module.css';
 
 export default function RegisterHelperPage() {
     return (

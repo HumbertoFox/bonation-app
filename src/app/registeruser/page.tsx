@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import FormRegisterUser from '@/app/components/forms/formregisteruser';
-import styles from '@/app/style/login.module.css';
+import styles from '@/app/style/pages.module.css';
 
 export default function RgisterUserPage() {
     return (

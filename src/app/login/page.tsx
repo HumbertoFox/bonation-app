@@ -2,7 +2,7 @@
 import FormLogin from '@/app/components/forms/formlogin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCheck } from '@fortawesome/free-solid-svg-icons';
-import styles from '@/app/style/login.module.css';
+import styles from '@/app/style/pages.module.css';
 
 export default function LoginPage() {
     return (
