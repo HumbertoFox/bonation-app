@@ -16,10 +16,10 @@ export default function FormRegisterHelper() {
                     <input type='radio' name='residence' id='buildings' value='building' />
                     Edifício</label>
             </div>
-            <div className={styles.divuserbuilding}>
+            <div className={styles.divhelperbuilding}>
                 <input type='text' id='building' placeholder='Nome do Edifício' />
                 <input type='text' id='block' placeholder='Bloco' />
-                <input type='text' id='livingapartmentroom' placeholder='Apartamento/Sala' />
+                <input type='text' id='apartment' placeholder='Apartamento' />
             </div>
             <input type='text' id='neighborhod' placeholder='Bairro/Distrito' />
             <input type='text' id='city' placeholder='Cidade' />

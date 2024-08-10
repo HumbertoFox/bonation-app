@@ -20,7 +20,8 @@
 }
 
 .user,
-.helper {
+.helper,
+.driver {
     width: 95px;
     height: 95px;
     color: blue;
@@ -32,7 +33,8 @@
     }
 
     .user,
-    .helper {
+    .helper,
+    .driver {
         width: 75px;
         height: 75px;
     }

@@ -1,6 +1,7 @@
 .formlogin,
 .formuser,
-.formhelper {
+.formhelper,
+.formdriver {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +16,10 @@
 .formuser input[type=number],
 .formhelper input[type=text],
 .formhelper input[type=password],
-.formhelper input[type=number] {
+.formhelper input[type=number],
+.formdriver input[type=text],
+.formdriver input[type=password],
+.formdriver input[type=number] {
     border: none;
     background-color: #E7E7E7;
     border-radius: 5px;
@@ -29,7 +33,10 @@
 .formuser input[type=number]::placeholder,
 .formhelper input[type=text]::placeholder,
 .formhelper input[type=password]::placeholder,
-.formhelper input[type=number]::placeholder {
+.formhelper input[type=number]::placeholder,
+.formdriver input[type=text]::placeholder,
+.formdriver input[type=password]::placeholder,
+.formdriver input[type=number]::placeholder {
     font-weight: bold;
 }
 
@@ -37,7 +44,9 @@
 .formuser input[type=submit],
 .divbtnuser button,
 .formhelper input[type=submit],
-.divbtnhelper button {
+.divbtnhelper button,
+.formdriver input[type=submit],
+.divbtndriver button  {
     font-size: 1rem;
     color: white;
     font-weight: bold;
@@ -51,18 +60,21 @@
 
 .formlogin input[type=submit]:hover,
 .formuser input[type=submit]:hover,
-.formhelper input[type=submit]:hover {
+.formhelper input[type=submit]:hover,
+.formdriver input[type=submit]:hover {
     background-color: cornflowerblue
 }
 
 .formlogin input[type=submit]:active,
 .formuser input[type=submit]:active,
-.formhelper input[type=submit]:active {
+.formhelper input[type=submit]:active,
+.formdriver input[type=submit]:active {
     background-color: blue;
 }
 
 .formuser label,
-.formhelper label {
+.formhelper label,
+.formdriver label {
     display: flex;
     font-size: .79rem;
     color: grey;
@@ -71,13 +83,17 @@
 .divbtnuser,
 .divradiususer,
 .divbtnhelper,
-.divradiushelper {
+.divradiushelper,
+.divbtndriver,
+.divradiusdriver {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
 }
 
-.divuserbuilding {
+.divuserbuilding,
+.divhelperbuilding,
+.divdriverbuilding {
     display: flex;
     flex-direction: column;
     gap: 15px;
