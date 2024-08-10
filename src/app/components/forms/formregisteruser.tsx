@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import styles from './forms.module.css';
+import styles from '@/app/components/style/forms.module.css';
 
 export default function FormRegisterUser() {
     const [ispass, setIspass] = useState(false);

@@ -1,4 +1,4 @@
-import styles from './forms.module.css';
+import styles from '@/app/components/style/forms.module.css';
 
 export default function FormRegisterDonations() {
     return (
