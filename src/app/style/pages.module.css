@@ -19,12 +19,34 @@
     border-radius: 15px;
 }
 
+.divmenuregister {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 50px;
+    border: 1px solid blue;
+    border-radius: 15px;
+}
+
 .user,
 .helper,
 .driver,
 .vehicle {
+    width: 75px;
+    height: 75px;
+    color: blue;
+}
+
+.iconsmenu {
     width: 95px;
     height: 95px;
+    color: green;
+    transition: all .4s ease-in-out;
+}
+
+.iconsmenu:hover {
     color: blue;
 }
 
@@ -37,7 +59,19 @@
     .helper,
     .driver,
     .vehicle {
-        width: 75px;
-        height: 75px;
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media (max-width: 800px) {
+    .divmenuregister {
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        max-width: 375px;
     }
 }

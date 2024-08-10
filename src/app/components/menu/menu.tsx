@@ -42,7 +42,7 @@ export default function Menu() {
     }, [navigate]);
     return (
         <div className={styles.section}>
-            <Link className={styles.linkimg} href={'/login'}>
+            <Link className={styles.linkimg} href={'/registermenu'}>
                 <Image src={EnterpriseImg} alt='Logo Empresa' priority />
             </Link>
             <nav>
