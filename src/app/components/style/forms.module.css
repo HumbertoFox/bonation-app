@@ -37,20 +37,20 @@
 .formdriver input[type=text]::placeholder,
 .formdriver input[type=number]::placeholder,
 .formvehicle input[type=text]::placeholder,
-.formvehicle input[type=number]::placeholder  {
+.formvehicle input[type=number]::placeholder {
     font-weight: bold;
 }
 
 .formlogin input[type=submit],
 .formuser input[type=submit],
-.divbtnuser button,
 .formhelper input[type=submit],
-.divbtnhelper button,
 .formdriver input[type=submit],
-.divbtndriver button,
 .formvehicle input[type=submit],
+.divbtnuser button,
+.divbtnhelper button,
+.divbtndriver button,
 .divbtnvehicle button {
-    font-size: 1rem;
+font-size: 1rem;
     color: white;
     font-weight: bold;
     background-color: blue;
@@ -150,7 +150,8 @@
 }
 
 .formdonation legend,
-.formdonor legend {
+.formdonor legend,
+.formsearch legend {
     text-shadow: 1px 1px 0.5px #AAF998;
     padding-bottom: 5px;
     transition: all .4s ease-in-out;
@@ -158,7 +159,8 @@
 }
 
 .formdonation label,
-.formdonor label {
+.formdonor label,
+.formsearch label {
     color: grey;
     padding-left: 5px;
 }
@@ -168,6 +170,7 @@
 .formdonor input[type="number"],
 .formdonor input[type="tel"],
 .formdonor input[type="password"],
+.formsearch input[type=search],
 .formdonor textarea {
     height: 30px;
     border: 1px solid #D2D4DE;
@@ -184,9 +187,10 @@
 
 .formdonation input[type=text]:focus,
 .formdonor input[type=text]:focus,
-.formdonor input[type="number"]:focus,
-.formdonor input[type="tel"]:focus,
-.formdonor input[type="password"]:focus,
+.formdonor input[type=number]:focus,
+.formdonor input[type=tel]:focus,
+.formdonor input[type=password]:focus,
+.formsearch input[type=search]:focus,
 .formdonor textarea:focus,
 .formdonation textarea:focus {
     border: 1px solid hsla(205.46, 86.5%, 46.47%, .5);
@@ -211,18 +215,14 @@
     padding: 5px;
 }
 
-.formdonation input[type=search]:focus {
-    border: 1px solid hsla(205.46, 86.5%, 46.47%, .5);
-    box-shadow: 0 0 5px hsla(205.46, 86.5%, 46.47%, .5);
-}
-
 .formdonation input.required:focus {
     border: 1px solid hsla(332.47, 100%, 50%, .5);
     box-shadow: 0 0 5px hsla(332.47, 100%, 50%, .5);
 }
 
 .formdonation input.required,
-.formdonor input.required {
+.formdonor input.required,
+.formsearch input.required {
     border: 1px solid hsla(332.47, 100%, 50%, .5);
     background: url(../../../assets/ponto-de-exclamacao.png) right 2% bottom 50% no-repeat;
     background-size: 20px;
@@ -233,13 +233,15 @@
 }
 
 .formdonor input.required:focus,
-.formdonor textarea.required:focus {
+.formdonor textarea.required:focus,
+.formsearch input.required:focus {
     border: 1px solid hsla(332.47, 100%, 50%, .5);
     box-shadow: 0 0 5px hsla(332.47, 100%, 50%, .5);
 }
 
 .formdonation .required::placeholder,
-.formdonor .required::placeholder {
+.formdonor .required::placeholder,
+.formsearch .required::placeholder {
     font-style: italic;
     color: hsla(332.47, 100%, 50%, .5);
 }
@@ -248,7 +250,7 @@
     display: flex;
     flex-wrap: wrap;
     column-gap: 10px;
-    transition: .3s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 
 .divobjqtd {
@@ -273,17 +275,19 @@
     transition: .3s ease-in-out;
 }
 
-.divqtd input[type="text"] {
+.divqtd input[type=text] {
     width: 150px;
     transition: .3s ease-in-out;
 }
 
-.divbtn {
+.divbtn,
+.divbtnsearch {
     display: flex;
     justify-content: space-evenly;
 }
 
-.inputsubmit {
+.divbtn input[type=submit],
+.divbtnsearch input[type=submit] {
     background-color: #AAF998;
     border-radius: 5px;
     text-shadow: 1px 1px 0.5px #79D1FF;
@@ -292,12 +296,14 @@
     transition: all .4s ease-in-out;
 }
 
-.inputsubmit:hover {
+.divbtn input[type=submit]:hover,
+.divbtnsearch input[type=submit]:hover {
     background-color: #79D1FF;
     text-shadow: 1px 1px 0.5px #AAF998;
 }
 
-.formdonor {
+.formdonor,
+.formsearch {
     width: 280px;
     display: flex;
     flex-direction: column;
@@ -311,7 +317,7 @@
     justify-content: center;
 }
 
-.divradius input[type="radio"],
+.divradius input[type=radio],
 .divradius label {
     cursor: pointer;
     transition: all .4s ease-in-out;
@@ -320,6 +326,7 @@
 .divradius label {
     padding-right: 15px;
 }
+
 .divradius label:hover {
     color: hsla(205.46, 86.5%, 46.47%, .5);
 }
@@ -332,7 +339,19 @@
 }
 
 .formdonor input::-webkit-outer-spin-button,
-.formdonor input::-webkit-inner-spin-button {
+.formdonor input::-webkit-inner-spin-button,
+.formdonation input::-webkit-outer-spin-button,
+.formdonation input::-webkit-inner-spin-button,
+.formsearch input::-webkit-outer-spin-button,
+.formsearch input::-webkit-inner-spin-button,
+.formuser input::-webkit-outer-spin-button,
+.formuser input::-webkit-inner-spin-button,
+.formdriver input::-webkit-outer-spin-button,
+.formdriver input::-webkit-inner-spin-button,
+.formhelper input::-webkit-outer-spin-button,
+.formhelper input::-webkit-inner-spin-button,
+.formvehicle input::-webkit-outer-spin-button,
+.formvehicle input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }

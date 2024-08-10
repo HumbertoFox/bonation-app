@@ -24,20 +24,20 @@ export default function Menu() {
                 router.push('/registerdonation');
             } else if (activeMenuLinkSelection == 'RegisterDonor') {
                 router.push('/registerdonor');
-            } else if (activeMenuLinkSelection == 'Editar Doação') {
-                router.push('/EditaDoacao');
-            } else if (activeMenuLinkSelection == 'Editar Doador') {
-                router.push('/EditaDoador');
-            } else if (activeMenuLinkSelection == 'Agendar Coleta') {
-                router.push('/AgendarColeta');
-            } else if (activeMenuLinkSelection == 'Confirmar Coleta') {
-                router.push('/ConfirmColeta');
-            } else if (activeMenuLinkSelection == 'Relatório') {
-                router.push('/Relatorio');
+            } else if (activeMenuLinkSelection == 'EditDonation') {
+                router.push('/underconstruction');
+            } else if (activeMenuLinkSelection == 'EditDonor') {
+                router.push('/editdonor');
+            } else if (activeMenuLinkSelection == 'ScheduleCollection') {
+                router.push('/underconstruction');
+            } else if (activeMenuLinkSelection == 'ConfirmCollection') {
+                router.push('/underconstruction');
+            } else if (activeMenuLinkSelection == 'Report') {
+                router.push('/underconstruction');
             };
         } else {
-            setNavMenuLink('RegisterDonation');
-            router.push('/registerdonation');
+            setNavMenuLink('Agenda');
+            router.push('/underconstruction');
         };
     }, [router]);
     return (
@@ -59,37 +59,37 @@ export default function Menu() {
                     </Link>
                 </div>
                 <div>
-                    <Link title='Editar Doação' href={'/EditaDoacao'} className={navMenuLink == 'Editar Doação' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Editar Doação')}>
+                    <Link title='Editar Doação' href={'/underconstruction'} className={navMenuLink == 'EditDonation' ? styles.active : ''} onClick={() => handlesMenuLinkClick('EditDonation')}>
                         <FontAwesomeIcon icon={faSquarePen} />
                         <span>Editar Doação</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Editar Doador' href={'/EditaDoador'} className={navMenuLink == 'Editar Doador' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Editar Doador')}>
+                    <Link title='Editar Doador' href={'/editdonor'} className={navMenuLink == 'EditDonor' ? styles.active : ''} onClick={() => handlesMenuLinkClick('EditDonor')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faUserPen} />
                         <span>Editar Doador</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Agendar Coleta' href={'/AgendarColeta'} className={navMenuLink == 'Confirmar Coleta' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Agendar Coleta')}>
+                    <Link title='Agendar Coleta' href={'/underconstruction'} className={navMenuLink == 'ScheduleCollection' ? styles.active : ''} onClick={() => handlesMenuLinkClick('ScheduleCollection')}>
                         <FontAwesomeIcon icon={faCalendarPlus} />
                         <span>Agendar Coleta</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Confirmar Coleta' href={'/ConfirmColeta'} className={navMenuLink == 'Confirmar Coleta' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Confirmar Coleta')}>
+                    <Link title='Confirmar Coleta' href={'/underconstruction'} className={navMenuLink == 'ConfirmCollection' ? styles.active : ''} onClick={() => handlesMenuLinkClick('ConfirmCollection')}>
                         <FontAwesomeIcon icon={faCalendarCheck} />
                         <span>Confirmar Coleta</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Relatório' href={'/Relatorio'} className={navMenuLink == 'Relatório' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Relatório')}>
+                    <Link title='Relatório' href={'/underconstruction'} className={navMenuLink == 'Report' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Report')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faFileCircleCheck} />
                         <span>Relatório</span>
                     </Link>
                 </div>
                 <div>
-                    <Link title='Agenda' href={'/Agenda'} className={navMenuLink == 'Agenda' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Agenda')}>
+                    <Link title='Agenda' href={'/underconstruction'} className={navMenuLink == 'Agenda' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Agenda')}>
                         <FontAwesomeIcon icon={faCalendarDays} />
                         <span>Agenda</span>
                     </Link>

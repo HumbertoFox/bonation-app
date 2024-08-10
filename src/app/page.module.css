@@ -12,7 +12,19 @@
   display: flex;
   column-gap: 10px;
   padding: 5px;
-  transition: .3s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.divmainforms {
+  position: relative;
+  width: calc(100% - 200px);
+  left: 200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 5px;
+  transition: all .4s ease-in-out;
 }
 
 @media (max-width: 480px) {
