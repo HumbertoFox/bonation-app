@@ -1,13 +1,17 @@
-.formlogin {
+.formlogin,
+.formuser {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     gap: 15px;
 }
 
 .formlogin input[type=text],
-.formlogin input[type=password] {
+.formlogin input[type=password],
+.formuser input[type=text],
+.formuser input[type=password],
+.formuser input[type=number] {
     border: none;
     background-color: #E7E7E7;
     border-radius: 5px;
@@ -15,11 +19,16 @@
 }
 
 .formlogin input[type=text]::placeholder,
-.formlogin input[type=password]::placeholder {
+.formlogin input[type=password]::placeholder,
+.formuser input[type=text]::placeholder,
+.formuser input[type=password]::placeholder,
+.formuser input[type=number]::placeholder {
     font-weight: bold;
 }
 
-.formlogin input[type=submit] {
+.formlogin input[type=submit],
+.formuser input[type=submit],
+.formuser .divbtnuser button {
     font-size: 1rem;
     color: white;
     font-weight: bold;
@@ -31,12 +40,32 @@
     transition: all .4s ease-in-out;
 }
 
-.formlogin input[type=submit]:hover {
+.formlogin input[type=submit]:hover,
+.formuser input[type=submit]:hover {
     background-color: cornflowerblue
 }
 
-.formlogin input[type=submit]:active {
+.formlogin input[type=submit]:active,
+.formuser input[type=submit]:active {
     background-color: blue;
+}
+
+.formuser label {
+    display: flex;
+    font-size: .79rem;
+    color: grey;
+}
+
+.divbtnuser {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.divuserbuilding {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .divpass {

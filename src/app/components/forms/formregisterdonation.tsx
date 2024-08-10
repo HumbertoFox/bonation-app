@@ -1,6 +1,6 @@
 import styles from './forms.module.css';
 
-export default function FormCadDonations() {
+export default function FormRegisterDonations() {
     return (
         <form className={styles.formdonation}>
             <fieldset>

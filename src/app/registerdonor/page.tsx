@@ -1,4 +1,4 @@
-import FormCadDonor from '@/app/components/forms/formcaddonor';
+import FormRegisterDonor from '@/app/components/forms/formregisterdonor';
 import Menu from '@/app/components/menu/menu';
 import styles from '@/app/page.module.css';
 
@@ -7,7 +7,7 @@ export default function RegisterDonorPage() {
         <main className={styles.main}>
             <Menu />
             <div className={styles.divmain}>
-                <FormCadDonor />
+                <FormRegisterDonor />
             </div>
         </main>
     );
