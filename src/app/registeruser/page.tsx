@@ -1,7 +1,7 @@
 'use client';
-import FormRegisterUser from '@/app/components/forms/formregisteruser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import FormRegisterUser from '@/app/components/forms/formregisteruser';
 import styles from '@/app/style/login.module.css';
 
 export default function RgisterUserPage() {

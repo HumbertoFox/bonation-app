@@ -19,7 +19,8 @@
     border-radius: 15px;
 }
 
-.user {
+.user,
+.helper {
     width: 95px;
     height: 95px;
     color: blue;
@@ -30,7 +31,8 @@
         font-size: 1rem;
     }
 
-    .user {
+    .user,
+    .helper {
         width: 75px;
         height: 75px;
     }
