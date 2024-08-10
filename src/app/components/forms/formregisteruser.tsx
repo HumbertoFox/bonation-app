@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/app/components/style/forms.module.css';
 
 export default function FormRegisterUser() {
+    const router = useRouter();
     const [ispass, setIspass] = useState(false);
     const [ispasschecked, setIspasschecked] = useState(false);
     const handlePass = () => setIspass(!ispass);
@@ -47,7 +49,7 @@ export default function FormRegisterUser() {
             </div>
             <div className={styles.divbtnuser}>
                 <input type='submit' title='Cadastrar Ajudante' value='Cadastrar' />
-                <button type='button' title='Voltar ao Menu'>Menu</button>
+                <button type='button' title='Voltar ao Menu' onClick={() => router.push('/registermenu')}>Menu</button>
             </div>
         </form>
     );

@@ -10,7 +10,7 @@ import { faPenToSquare, faUserPlus, faSquarePen, faUserPen, faCalendarPlus, faCa
 
 export default function Menu() {
     const [navMenuLink, setNavMenuLink] = useState('');
-    const navigate = useRouter();
+    const router = useRouter();
     const handlesMenuLinkClick = (element: string) => {
         setNavMenuLink(element);
         localStorage.setItem('activeMenuLinkSelection', element);
@@ -21,25 +21,25 @@ export default function Menu() {
         if (activeMenuLinkSelection != null) {
             setNavMenuLink(activeMenuLinkSelection);
             if (activeMenuLinkSelection == 'RegisterDonation') {
-                navigate.push('/registerdonation');
+                router.push('/registerdonation');
             } else if (activeMenuLinkSelection == 'RegisterDonor') {
-                navigate.push('/registerdonor');
+                router.push('/registerdonor');
             } else if (activeMenuLinkSelection == 'Editar Doação') {
-                navigate.push('/EditaDoacao');
+                router.push('/EditaDoacao');
             } else if (activeMenuLinkSelection == 'Editar Doador') {
-                navigate.push('/EditaDoador');
+                router.push('/EditaDoador');
             } else if (activeMenuLinkSelection == 'Agendar Coleta') {
-                navigate.push('/AgendarColeta');
+                router.push('/AgendarColeta');
             } else if (activeMenuLinkSelection == 'Confirmar Coleta') {
-                navigate.push('/ConfirmColeta');
+                router.push('/ConfirmColeta');
             } else if (activeMenuLinkSelection == 'Relatório') {
-                navigate.push('/Relatorio');
+                router.push('/Relatorio');
             };
         } else {
             setNavMenuLink('RegisterDonation');
-            navigate.push('/registerdonation');
+            router.push('/registerdonation');
         };
-    }, [navigate]);
+    }, [router]);
     return (
         <div className={styles.section}>
             <Link className={styles.linkimg} href={'/registermenu'}>

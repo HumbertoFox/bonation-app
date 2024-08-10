@@ -1,6 +1,9 @@
+import { useRouter } from 'next/navigation';
 import styles from '@/app/components/style/forms.module.css';
 
 export default function FormRegisterHelper() {
+    const router = useRouter();
+
     return (
         <form className={styles.formhelper}>
             <input type='text' id='name' placeholder='Nome' />
@@ -25,7 +28,7 @@ export default function FormRegisterHelper() {
             <input type='text' id='city' placeholder='Cidade' />
             <div className={styles.divbtnhelper}>
                 <input type='submit' title='Cadastrar Ajudante' value='Cadastrar' />
-                <button type='button' title='Voltar ao Menu'>Menu</button>
+                <button type='button' title='Voltar ao Menu' onClick={() => router.push('/registermenu')}>Menu</button>
             </div>
         </form>
     );

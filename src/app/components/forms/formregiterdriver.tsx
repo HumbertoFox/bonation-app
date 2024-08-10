@@ -1,6 +1,9 @@
+import { useRouter } from 'next/navigation';
 import styles from '@/app/components/style/forms.module.css';
 
 export default function FormRegisterDriver() {
+    const router = useRouter();
+
     return (
         <form className={styles.formdriver}>
             <input type='text' id='name' placeholder='Nome' />
@@ -25,7 +28,7 @@ export default function FormRegisterDriver() {
             <input type='text' id='city' placeholder='Cidade' />
             <div className={styles.divbtndriver}>
                 <input type='submit' title='Cadastrar Motorista' value='Cadastrar' />
-                <button type='button' title='Voltar ao Menu'>Menu</button>
+                <button type='button' title='Voltar ao Menu' onClick={() => router.push('/registermenu')}>Menu</button>
             </div>
         </form>
     );
