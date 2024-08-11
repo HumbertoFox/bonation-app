@@ -40,7 +40,8 @@
 }
 
 @media (max-width: 1080px) {
-  .divmain {
+  .divmain,
+  .divmainforms {
     width: calc(100% - 70px);
     left: 70px;
   }
