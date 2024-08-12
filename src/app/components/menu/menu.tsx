@@ -25,7 +25,7 @@ export default function Menu() {
             } else if (activeMenuLinkSelection == 'RegisterDonor') {
                 router.push('/registerdonor');
             } else if (activeMenuLinkSelection == 'EditDonation') {
-                router.push('/underconstruction');
+                router.push('/editdonation');
             } else if (activeMenuLinkSelection == 'EditDonor') {
                 router.push('/editdonor');
             } else if (activeMenuLinkSelection == 'ScheduleCollection') {
@@ -59,7 +59,7 @@ export default function Menu() {
                     </Link>
                 </div>
                 <div>
-                    <Link title='Editar Doação' href={'/underconstruction'} className={navMenuLink == 'EditDonation' ? styles.active : ''} onClick={() => handlesMenuLinkClick('EditDonation')}>
+                    <Link title='Editar Doação' href={'/editdonation'} className={navMenuLink == 'EditDonation' ? styles.active : ''} onClick={() => handlesMenuLinkClick('EditDonation')}>
                         <FontAwesomeIcon icon={faSquarePen} />
                         <span>Editar Doação</span>
                     </Link>

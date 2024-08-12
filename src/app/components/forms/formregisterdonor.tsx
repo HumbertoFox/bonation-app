@@ -1,9 +1,14 @@
 import styles from '@/app/components/style/forms.module.css';
 
-export default function FormRegisterDonor() {
+type FormDonorProps = {
+    id?: boolean
+};
+
+export default function FormRegisterDonor({ id }: FormDonorProps) {
+
     return (
         <form className={styles.formdonor}>
-            <fieldset>
+            <fieldset disabled={id} >
                 <legend>Informações do Doador</legend>
                 <div className={styles.divcoddonor}>
                     <label htmlFor='donorcode'>Código do Doador</label>
@@ -50,10 +55,11 @@ export default function FormRegisterDonor() {
                 <label htmlFor='city'>Cidade</label>
                 <input type='text' id='city' />
             </fieldset>
-            <div className={styles.divbtn}>
-                <input type='submit' title='Cadastrar Doador e ir para Cadastrar Doação' className={styles.inputsubmit} value='Cad Doador/Doação' />
-                <input type='submit' title='Cadastrar Doador' className={styles.inputsubmit} value='Cadastrar Doador' />
-            </div>
+            {!id &&
+                <div className={styles.divbtn}>
+                    <input type='submit' title='Cadastrar Doador e ir para Cadastrar Doação' className={styles.inputsubmit} value='Cad Doador/Doação' />
+                    <input type='submit' title='Cadastrar Doador' className={styles.inputsubmit} value='Cadastrar Doador' />
+                </div>}
         </form>
     );
 };
