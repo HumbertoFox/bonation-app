@@ -1,18 +1,24 @@
 import styles from '@/app/components/style/forms.module.css';
 
-export default function FormRegisterDonations() {
+type FormDonationProps = {
+    id?: string
+};
+
+export default function FormRegisterDonations({ id }: FormDonationProps) {
+
     return (
         <form className={styles.formdonation}>
             <fieldset>
                 <legend>Lista de objetos a serem doados</legend>
                 <div className={styles.divcods}>
-                    <div className={styles.divobj}>
+                    {id && <div className={styles.divobj}>
                         <label htmlFor='coddonation'>Código da Doação</label>
-                        <input type='text' id='coddonation' />
+                        <input type='text' id='coddonation' disabled />
                     </div>
+                    }
                     <div className={styles.divobj}>
                         <label htmlFor='donorcode'>Código do Doador</label>
-                        <input type='text' id='donorcode' />
+                        <input type='text' id='donorcode' disabled />
                     </div>
                 </div>
                 <div className={styles.divobjprimary}>
@@ -161,8 +167,8 @@ export default function FormRegisterDonations() {
                 <textarea id='obs' />
             </fieldset>
             <div className={styles.divbtn}>
-                <input type='submit' className={styles.inputsubmit} value='Cadastrar Doação' />
-                <input type='submit' className={styles.inputsubmit} value='Cadastrar e agendar' />
+                <input type='submit' title={id ? 'Editar Doação' : 'Cadastrar Doação'} className={styles.inputsubmit} value={id ? 'Edit. Doação' : 'Cad. Doação'} />
+                {!id && <input type='submit' title='Cadastrar Doação e ir para Agendar Coleta' className={styles.inputsubmit} value='Cad. e Agendar' />}
             </div>
         </form>
     );

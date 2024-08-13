@@ -9,7 +9,7 @@ export default function EditDonorPage() {
             <Menu />
             <div className={styles.divmainforms}>
                 <FormSearch />
-                <FormRegisterDonor />
+                <FormRegisterDonor name='Edit.' />
             </div>
         </main>
     );

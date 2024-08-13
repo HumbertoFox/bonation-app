@@ -10,7 +10,7 @@ export default function EditDonationPage() {
             <Menu />
             <div className={styles.divmainforms}>
                 <FormSearch id='editdonation' />
-                <FormRegisterDonations />
+                <FormRegisterDonations id='editdonation' />
                 <FormRegisterDonor id={true} />
             </div>
         </main>

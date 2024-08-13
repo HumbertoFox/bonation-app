@@ -1,19 +1,21 @@
 import styles from '@/app/components/style/forms.module.css';
 
 type FormDonorProps = {
-    id?: boolean
+    id?: boolean,
+    name?: string
 };
 
-export default function FormRegisterDonor({ id }: FormDonorProps) {
+export default function FormRegisterDonor({ id, name }: FormDonorProps) {
 
     return (
         <form className={styles.formdonor}>
             <fieldset disabled={id} >
                 <legend>Informações do Doador</legend>
-                <div className={styles.divcoddonor}>
+                {name && <div className={styles.divcoddonor}>
                     <label htmlFor='donorcode'>Código do Doador</label>
                     <input type='text' id='donorcode' disabled />
                 </div>
+                }
                 <label htmlFor='name'>Nome do Doador</label>
                 <input type='text' id='name' />
                 <label htmlFor='contact1'>Número Móvel do Responsável</label>
@@ -57,9 +59,10 @@ export default function FormRegisterDonor({ id }: FormDonorProps) {
             </fieldset>
             {!id &&
                 <div className={styles.divbtn}>
-                    <input type='submit' title='Cadastrar Doador e ir para Cadastrar Doação' className={styles.inputsubmit} value='Cad Doador/Doação' />
-                    <input type='submit' title='Cadastrar Doador' className={styles.inputsubmit} value='Cadastrar Doador' />
-                </div>}
+                    {!name && <input type='submit' title='Cadastrar Doador e ir para Cadastrar Doação' className={styles.inputsubmit} value='Cad. Doad. Doação' />}
+                    <input type='submit' title={name ? name + ' Doador' : 'Cadastrar Doador'} className={styles.inputsubmit} value={name ? name + ' Doador' : 'Cad. Doador'} />
+                </div>
+            }
         </form>
     );
 };
