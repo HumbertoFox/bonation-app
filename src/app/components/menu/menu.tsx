@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from '@/app/components/style/menu.module.css';
 import EnterpriseImg from '@/assets/LOGOBFN-INTER.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faUserPlus, faSquarePen, faUserPen, faCalendarPlus, faCalendarCheck, faCalendarDays, faFileCircleCheck, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faUserPlus, faSquarePen, faUserPen, faCalendarPlus, faCalendarCheck, faCalendarDays, faFileCircleCheck, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function Menu() {
     const [navMenuLink, setNavMenuLink] = useState('');
@@ -33,7 +33,7 @@ export default function Menu() {
             } else if (activeMenuLinkSelection == 'ConfirmCollection') {
                 router.push('/underconstruction');
             } else if (activeMenuLinkSelection == 'Report') {
-                router.push('/underconstruction');
+                router.push('/report');
             };
         } else {
             setNavMenuLink('Agenda');
@@ -83,7 +83,7 @@ export default function Menu() {
                     </Link>
                 </div>
                 <div>
-                    <Link title='Relatório' href={'/underconstruction'} className={navMenuLink == 'Report' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Report')}>
+                    <Link title='Relatório' href={'/report'} className={navMenuLink == 'Report' ? styles.active : ''} onClick={() => handlesMenuLinkClick('Report')}>
                         <FontAwesomeIcon className={styles.rotatesvg} icon={faFileCircleCheck} />
                         <span>Relatório</span>
                     </Link>
@@ -96,7 +96,7 @@ export default function Menu() {
                 </div>
                 <div>
                     <Link href={'/login'}>
-                        <FontAwesomeIcon className={styles.rotatesvg} icon={faRightToBracket} />
+                        <FontAwesomeIcon className={styles.rotatesvg} icon={faRightFromBracket} />
                         <span>Sair do Sistema</span>
                     </Link>
                 </div>
