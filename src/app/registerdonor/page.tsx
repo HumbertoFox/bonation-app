@@ -7,7 +7,7 @@ export default function RegisterDonorPage() {
         <main className={styles.main}>
             <Menu />
             <div className={styles.divmain}>
-                <FormRegisterDonor />
+                <FormRegisterDonor idDonor='off' />
             </div>
         </main>
     );
