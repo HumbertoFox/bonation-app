@@ -3,16 +3,16 @@ import styles from '@/app/components/style/forms.module.css';
 type FormDonorProps = {
     id?: boolean,
     name?: string,
-    idDonor: string
+    iddonor?: string
 };
 
-export default function FormRegisterDonor({ id, name, idDonor }: FormDonorProps) {
+export default function FormRegisterDonor({ id, name, iddonor }: FormDonorProps) {
 
     return (
         <form className={styles.formdonor}>
             <fieldset disabled={id} >
                 <legend>Informações do Doador</legend>
-                {!idDonor && <div className={styles.divcoddonor}>
+                {!iddonor && <div className={styles.divcoddonor}>
                     <label htmlFor='donorcode'>Código do Doador</label>
                     <input type='text' id='donorcode' disabled />
                 </div>
