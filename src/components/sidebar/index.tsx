@@ -41,7 +41,7 @@ export default function SideBar() {
     }, [router]);
     return (
         <div className='w-[12.5rem] h-screen flex flex-col fixed border-r-[3px] border-[#79D1FF] bg-[#AAF998] duration-[400ms] overflow-hidden max-[1080px]:w-[4.375rem]'>
-            <Link href={'/menu/registermenu'} className='max-w-[150px] mx-auto duration-[400ms]'>
+            <Link href={'/menu'} className='max-w-[150px] mx-auto duration-[400ms]'>
                 <Image src={EnterpriseImg} className='w-full' alt='Logo Empresa' priority />
             </Link>
             <nav>
@@ -94,7 +94,7 @@ export default function SideBar() {
                     </Link>
                 </div>
                 <div className=' duration-[400ms] mt-4'>
-                    <Link href={'/login'} className='flex items-center p-2.5 gap-[0.938rem] duration-[400ms] hover:text-white'>
+                    <Link href={'/menu/login'} className='flex items-center p-2.5 gap-[0.938rem] duration-[400ms] hover:text-white'>
                         <FontAwesomeIcon icon={faRightFromBracket} className='text-[2rem] rotate-180' />
                         <span className='max-[1080px]:hidden'>Sair do Sistema</span>
                     </Link>

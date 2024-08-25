@@ -6,7 +6,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main lang='pt-BR'>
+    <main>
       <SideBar />
       {children}
     </main>
