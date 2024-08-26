@@ -7,9 +7,10 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 interface TitleValue {
     title: string;
     value: string;
+    page: string;
 };
 
-export default function FormFull({ title, value }: TitleValue) {
+export default function FormFull({ title, value, page }: TitleValue) {
     const router = useRouter();
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
@@ -85,7 +86,7 @@ export default function FormFull({ title, value }: TitleValue) {
             }
             <div className='flex'>
                 <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />
-                {title !== 'Entrar' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
+                {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
         </form>
     );

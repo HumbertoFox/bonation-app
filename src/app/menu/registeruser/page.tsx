@@ -8,7 +8,7 @@ export default function RgisterUserPage() {
         <section className='flex flex-col items-center gap-[50px]'>
             <h1 className='text-blue-600 font-bold text-xl'>Cadastrar Usuário</h1>
             <FontAwesomeIcon icon={faUserPlus} className='text-[75px] text-[green]' />
-            <FormFull title='Cadastrar Usuário' value='Cadastrar' />
+            <FormFull title='Cadastrar Usuário' value='Cadastrar' page='Menu' />
         </section>
     );
 };
