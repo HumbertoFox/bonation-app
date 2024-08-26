@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       width: {
         'calc-sidebarfull': 'calc(100% - 200px)',
-        'calc-sidebarmin': 'calc(100% - 70px)',
+        'calc-sidebarmin': 'calc(100% - 70px)'
       }
     }
   },
