@@ -94,7 +94,7 @@ export default function SideBar() {
                     </Link>
                 </div>
                 <div className=' duration-[400ms] mt-4'>
-                    <Link href={'/menu/login'} className='flex items-center p-2.5 gap-[0.938rem] duration-[400ms] hover:text-white'>
+                    <Link href={'/'} className='flex items-center p-2.5 gap-[0.938rem] duration-[400ms] hover:text-white'>
                         <FontAwesomeIcon icon={faRightFromBracket} className='text-[2rem] rotate-180' />
                         <span className='max-[1080px]:hidden'>Sair do Sistema</span>
                     </Link>
