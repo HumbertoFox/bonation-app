@@ -7,7 +7,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {}
+    extend: {
+      width: {
+        'calc-sidebarfull': 'calc(100% - 200px)',
+        'calc-sidebarmin': 'calc(100% - 70px)',
+      }
+    }
   },
   plugins: [
     require('@tailwindcss/forms')
