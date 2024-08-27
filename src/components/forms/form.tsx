@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -12,13 +12,33 @@ interface TitleValuePage {
 
 export default function FormFull({ title, value, page }: TitleValuePage) {
     const router = useRouter();
+    const [age, setAge] = useState<number>(0);
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
     const handlePassword = () => setIspassword(!ispassword);
     const handlePasswordChecked = () => setIspasswordchecked(!ispasswordchecked);
+    const calculateAge = (data: string) => {
+        const birthDate = new Date(data);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        };
+        return age;
+    };
+    const handleDateChange = (element: ChangeEvent<HTMLInputElement>) => {
+        const data = element.target.value;
+        if (data) {
+            const calculatedAge = calculateAge(data);
+            setAge(calculatedAge);
+        } else {
+            setAge(0);
+        };
+    };
 
     return (
-        <form className='p-1 w-[280px]'>
+        <form action={'/'} className='p-1 w-[280px]'>
             {title === 'Cadastrar Veículo' && <div className='flex flex-col gap-[5px]'>
                 <input type='text' id='modelo' placeholder='Modelo' className='rounded py-0.5' />
                 <input type='text' id='chassi' placeholder='Chassi' className='rounded py-0.5' />
@@ -30,12 +50,24 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 {title.includes('Doador') && <legend className='mx-auto py-1 duration-[400ms]'>Informações do Doador</legend>}
                 {title === 'Editar Doador' && <input type='text' id='donorcode' disabled placeholder='Código do Doador' className='rounded py-0.5 cursor-not-allowed' />}
                 {title !== 'Entrar' && <input type='text' id='name' placeholder='Nome' className='rounded py-0.5' />}
-                {title.includes('Doador') && <div className='flex flex-col gap-[5px]'>
-                    <input type='tel' id='contact1' placeholder='Contato do Responsável' className='rounded py-0.5' />
-                    <input type='tel' id='contact2' placeholder='Contato do Responsável/Opcional' className='rounded py-0.5' />
-                    <input type='tel' id='contact3' placeholder='Contato/Opcional ou Ramal' className='rounded py-0.5' />
-                </div>}
-                {title !== 'Cadastrar Doador' && <input type='text' placeholder='CPF' className='rounded py-0.5' />}
+                {page === 'Menu' && <div className='flex gap-1'>
+                    <label htmlFor='dateofbirth'>Data de Nascimento
+                        <input type='date' id='dateofbirth' className='w-full rounded py-0.5' onBlur={handleDateChange} />
+                    </label>
+                    <div className='flex flex-col justify-end items-center'>
+                        <p>{age}</p>
+                        <p>anos</p>
+                    </div>
+                </div>
+                }
+                {(page === 'Menu' || page === 'Login') && <input type='text' placeholder='CPF' className='rounded py-0.5' />}
+                {page !== 'Login' && <input type='tel' id='contact' placeholder={page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'} className='rounded py-0.5' />}
+                {(page === 'Donation' || page === 'Dashboard') && <div className='flex flex-col gap-[5px]'>
+                    <input type='tel' id='contact1' placeholder='Contato do Responsável/Opcional' className='rounded py-0.5' />
+                    <input type='tel' id='contact2' placeholder='Contato/Opcional ou Ramal' className='rounded py-0.5' />
+                </div>
+                }
+                {page === 'Menu' && <input type='email' id='email' placeholder='Email' className='rounded py-0.5' />}
                 {title === 'Cadastrar Motorista' && <input type='number' id='cnh' placeholder='CNH' className='rounded py-0.5' />}
                 {title !== 'Entrar' && <div className='flex flex-col gap-[5px]'>
                     <input type='number' id='zipcode' placeholder='CEP' className='rounded py-0.5' />
@@ -55,7 +87,8 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                         {title.includes('Doador') && <label htmlFor='enterprise' className='flex items-center cursor-pointer'>
                             <input type='radio' name='residence' id='enterprise' value='enterprise' className='mr-1.5' />
                             Empresa
-                        </label>}
+                        </label>
+                        }
                     </div>
                     {title.includes('Doador') && <input type='text' id='cnpj' placeholder='CNPJ' className='rounded py-0.5' />}
                     <div className='flex flex-col gap-[5px]'>
