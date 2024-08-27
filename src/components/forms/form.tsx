@@ -67,7 +67,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 </div>
                 }
                 {(title === 'Entrar' || title === 'Cadastrar Usuário') && <div>
-                    <input type={ispassword ? 'text' : 'password'} id='password' placeholder='Senha' className='rounded py-0.5' />
+                    <input type={ispassword ? 'text' : 'password'} id='password' placeholder='Senha' className='w-full rounded py-0.5' />
                     <button type='button' onClick={handlePassword} className='relative'>
                         {!ispassword && <FontAwesomeIcon icon={faEye} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
                         {ispassword && <FontAwesomeIcon icon={faEyeSlash} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
@@ -75,7 +75,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 </div>
                 }
                 {title === 'Cadastrar Usuário' && <div>
-                    <input type={ispasswordchecked ? 'text' : 'password'} id='passwordcheck' placeholder='Confirmar Senha' className='rounded py-0.5' />
+                    <input type={ispasswordchecked ? 'text' : 'password'} id='passwordcheck' placeholder='Confirmar Senha' className='w-full rounded py-0.5' />
                     <button type='button' onClick={handlePasswordChecked} className='relative'>
                         {!ispasswordchecked && <FontAwesomeIcon icon={faEye} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
                         {ispasswordchecked && <FontAwesomeIcon icon={faEyeSlash} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
