@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-interface TitleValue {
+interface TitleValuePage {
     title: string;
     value: string;
     page: string;
 };
 
-export default function FormFull({ title, value, page }: TitleValue) {
+export default function FormFull({ title, value, page }: TitleValuePage) {
     const router = useRouter();
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
@@ -18,26 +18,26 @@ export default function FormFull({ title, value, page }: TitleValue) {
     const handlePasswordChecked = () => setIspasswordchecked(!ispasswordchecked);
 
     return (
-        <form>
-            {title === 'Cadastrar Veículo' && <div className='flex flex-col gap-[0.313rem]'>
+        <form className='p-1 w-[280px]'>
+            {title === 'Cadastrar Veículo' && <div className='flex flex-col gap-[5px]'>
                 <input type='text' id='modelo' placeholder='Modelo' className='rounded py-0.5' />
                 <input type='text' id='chassi' placeholder='Chassi' className='rounded py-0.5' />
                 <input type='text' id='plate' placeholder='Placa' className='rounded py-0.5' />
                 <input type='number' id='km' placeholder='Km' className='rounded py-0.5' />
             </div>
             }
-            {title !== 'Cadastrar Veículo' && <fieldset disabled={false} className='flex flex-col gap-[0.313rem]'>
+            {title !== 'Cadastrar Veículo' && <fieldset disabled={value === 'Donation' ? true : false} className='flex flex-col gap-[5px]'>
                 {title.includes('Doador') && <legend className='mx-auto py-1 duration-[400ms]'>Informações do Doador</legend>}
                 {title === 'Editar Doador' && <input type='text' id='donorcode' disabled placeholder='Código do Doador' className='rounded py-0.5 cursor-not-allowed' />}
                 {title !== 'Entrar' && <input type='text' id='name' placeholder='Nome' className='rounded py-0.5' />}
-                {title.includes('Doador') && <div className='flex flex-col gap-[0.313rem]'>
+                {title.includes('Doador') && <div className='flex flex-col gap-[5px]'>
                     <input type='tel' id='contact1' placeholder='Contato do Responsável' className='rounded py-0.5' />
                     <input type='tel' id='contact2' placeholder='Contato do Responsável/Opcional' className='rounded py-0.5' />
                     <input type='tel' id='contact3' placeholder='Contato/Opcional ou Ramal' className='rounded py-0.5' />
                 </div>}
                 {title !== 'Cadastrar Doador' && <input type='text' placeholder='CPF' className='rounded py-0.5' />}
                 {title === 'Cadastrar Motorista' && <input type='number' id='cnh' placeholder='CNH' className='rounded py-0.5' />}
-                {title !== 'Entrar' && <div className='flex flex-col gap-[0.313rem]'>
+                {title !== 'Entrar' && <div className='flex flex-col gap-[5px]'>
                     <input type='number' id='zipcode' placeholder='CEP' className='rounded py-0.5' />
                     <input type='text' id='street' placeholder='Logradouro: Av/Rua/Trav' className='rounded py-0.5' />
                     <input type='text' id='neighborhod' placeholder='Bairro/Distrito' className='rounded py-0.5' />
@@ -58,7 +58,7 @@ export default function FormFull({ title, value, page }: TitleValue) {
                         </label>}
                     </div>
                     {title.includes('Doador') && <input type='text' id='cnpj' placeholder='CNPJ' className='rounded py-0.5' />}
-                    <div className='flex flex-col gap-[0.313rem]'>
+                    <div className='flex flex-col gap-[5px]'>
                         <input type='text' id='building' placeholder='Nome do Edifício' className='rounded py-0.5' />
                         <input type='text' id='block' placeholder='Bloco' className='rounded py-0.5' />
                         <input type='text' id='livingapartmentroom' placeholder='Apartamento/Sala' className='rounded py-0.5' />
@@ -84,10 +84,12 @@ export default function FormFull({ title, value, page }: TitleValue) {
                 }
             </fieldset>
             }
-            <div className='flex'>
+            {value !== 'Donation' && <div className='flex'>
                 <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />
+                {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
                 {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
+            }
         </form>
     );
 };
