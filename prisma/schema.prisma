@@ -8,35 +8,35 @@ datasource db {
 }
 
 model User {
-  user_id           Int            @id @default(autoincrement())
-  cpf               String
-  telephone         String
-  password          String         @db.VarChar(200)
-  address_id        Int
-  createdAt         DateTime       @default(now())
-  updatedAt         DateTime       @updatedAt()
-  user_address      Address        @relation(fields: [address_id], references: [address_id])
-  user_cpf          Cpf            @relation(fields: [cpf], references: [cpf])
-  user_telephone    Telephone      @relation(fields: [telephone], references: [telephone])
+  user_id        Int       @id @default(autoincrement())
+  cpf            String
+  telephone      String
+  password       String    @db.VarChar(200)
+  address_id     Int
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt()
+  user_address   Address   @relation(fields: [address_id], references: [address_id])
+  user_cpf       Cpf       @relation(fields: [cpf], references: [cpf])
+  user_telephone Telephone @relation(fields: [telephone], references: [telephone])
 
   @@map("users")
 }
 
 model Cpf {
-  cpf              String         @id @db.VarChar(11)
-  name             String         @db.VarChar(100)
-  dateofbirth      String
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt()
-  cpf_user         User[]
+  cpf         String   @id @db.VarChar(11)
+  name        String   @db.VarChar(100)
+  dateofbirth String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt()
+  cpf_user    User[]
 
   @@map("cpfs")
 }
 
 model Telephone {
-  telephone         String    @id @db.VarChar(11)
-  email             String    @db.VarChar(150)
-  telephone_user    User[]
+  telephone      String @id @db.VarChar(11)
+  email          String @db.VarChar(150)
+  telephone_user User[]
 
   @@map("telephones")
 }
@@ -52,16 +52,16 @@ model Zipcode {
 }
 
 model Address {
-  address_id      Int       @id @default(autoincrement())
-  zipcode         String
-  residencenumber String    @db.VarChar(50)
-  building        String?   @db.VarChar(100)
-  buildingblock   String?   @db.VarChar(50)
-  apartment       String?   @db.VarChar(50)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt()
-  address_zipcode Zipcode   @relation(fields: [zipcode], references: [zipcode])
-  address_user    User[]
+  address_id          Int      @id @default(autoincrement())
+  zipcode             String
+  nunresidence        String   @db.VarChar(50)
+  building            String?  @db.VarChar(100)
+  block               String?  @db.VarChar(50)
+  livingapartmentroom String?  @db.VarChar(50)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt()
+  address_zipcode     Zipcode  @relation(fields: [zipcode], references: [zipcode])
+  address_user        User[]
 
   @@map("addresss")
 }

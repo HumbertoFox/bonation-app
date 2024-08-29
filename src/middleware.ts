@@ -4,7 +4,7 @@ export const config = {
     matcher: '/((?!_next/static|_next/image|faction.ico).*)',
 };
 
-const publicRoutes = ['/'];
+const publicRoutes = ['/', '/menu/registeruser'];
 
 export function middleware(req: NextRequest) {
     const pathname = req.nextUrl.pathname;
