@@ -23,25 +23,17 @@ export default async function CreateUser(formData: FormData) {
     const hashPassword = await bcrypt.hash(password, 10);
 
     try {
-        const existingUser = await prisma.user.findFirst({
-            where: { cpf }
-        });
+        const existingUser = await prisma.user.findFirst({ where: { cpf } });
 
         if (existingUser) {
             return { status: 400, Error: true, message: 'Usuário já cadastrado!' };
         };
 
-        const exitingCpf = await prisma.cpf.findUnique({
-            where: { cpf }
-        });
+        const exitingCpf = await prisma.cpf.findUnique({ where: { cpf } });
 
-        const existingTelephone = await prisma.telephone.findUnique({
-            where: { telephone }
-        });
+        const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
 
-        const existingZipcode = await prisma.zipcode.findUnique({
-            where: { zipcode }
-        });
+        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
 
         let existingAddress = await prisma.address.findFirst({
             where: { zipcode, nunresidence, building, block, livingapartmentroom }

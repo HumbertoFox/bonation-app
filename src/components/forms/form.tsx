@@ -11,9 +11,33 @@ interface TitleValuePage {
     page: string;
 };
 
-interface Inputs {
-
-};
+// interface Inputs {
+//     modelo?: string;
+//     chassi?: string;
+//     plate?: string;
+//     km?: number;
+//     donorcode?: string;
+//     dateofbirth?: Date;
+//     name?: string;
+//     cpf?: string;
+//     telephone?: string;
+//     contact1?: string;
+//     contact2?: string;
+//     email?: string;
+//     cnh?: number;
+//     zipcode?: string;
+//     nunresidence?: string;
+//     street?: string;
+//     district?: string;
+//     city?: string;
+//     residence?: string;
+//     cnpj?: string;
+//     building?: string;
+//     block?: string;
+//     livingapartmentroom?: string;
+//     referencepoint?: string;
+//     password?: string;
+// };
 
 interface ZipCodeValue {
     street: string;
@@ -29,6 +53,30 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
     const [zipCodeValue, setZipCodeValue] = useState<ZipCodeValue>({ street: '', district: '', city: '' });
     const emailInputRef = useRef<HTMLInputElement>(null);
     const numResidInputRef = useRef<HTMLInputElement>(null);
+    const cpfInputRef = useRef<HTMLInputElement>(null);
+    const getCheckedCpf = (data: string) => {
+        const isRepeatedCpf = (cpf: string) => {
+            const firstDigit = cpf[0];
+            return cpf.split('').every(digit => digit === firstDigit);
+        };
+        if (isRepeatedCpf(data)) {
+            return;
+        };
+        const calculateCheckDigit = (input: string) => {
+            let sum = 0;
+            for (let i = 0; i < input.length; i++) {
+                const digit = input.charAt(i);
+                const weight = (input.length + 1 - i);
+                sum += Number(digit) * weight;
+            };
+            const remainder = sum % 11;
+            return remainder < 2 ? '0' : (11 - remainder);
+        };
+        let primaryCheckDigit = calculateCheckDigit(data.substring(0, 9));
+        let secondaryCheckDigit = calculateCheckDigit(data.substring(0, 9) + primaryCheckDigit);
+        let correctCpf = data.substring(0, 9) + primaryCheckDigit + secondaryCheckDigit;
+        return data === correctCpf;
+    };
     const handleInputChange = (element: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = element.target;
         setZipCodeValue((prevValues) => ({
@@ -101,6 +149,12 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData.entries());
+        const cpf = data.cpf as string;
+        if (!getCheckedCpf(cpf)) {
+            cpfInputRef.current?.focus();
+            alert('CPF Invalido!');
+            return;
+        };
 
         console.log(data);
     };
@@ -111,7 +165,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 <input type='text' name='modelo' id='modelo' placeholder='Modelo' className='rounded py-0.5' />
                 <input type='text' name='chassi' id='chassi' placeholder='Chassi' className='rounded py-0.5' />
                 <input type='text' name='plate' id='plate' placeholder='Placa' className='rounded py-0.5' />
-                <input type='number' id='km' placeholder='Km' className='rounded py-0.5' />
+                <input type='number' name='km' id='km' placeholder='Km' className='rounded py-0.5' />
             </div>
             }
             {title !== 'Cadastrar Veículo' && <fieldset disabled={value === 'Donation' ? true : false} className='flex flex-col gap-[5px]'>
@@ -128,7 +182,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                     </div>
                 </div>
                 }
-                {(page === 'Menu' || page === 'Login') && <input type='text' name='cpf' id='cpf' placeholder='CPF' className='rounded py-0.5' />}
+                {(page === 'Menu' || page === 'Login') && <input type='text' name='cpf' id='cpf' placeholder='CPF' ref={cpfInputRef} className='rounded py-0.5' />}
                 {page !== 'Login' && <input type='tel' name='telephone' id='telephone' placeholder={page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'} className='rounded py-0.5' />}
                 {(page === 'Donation' || page === 'Dashboard') && <div className='flex flex-col gap-[5px]'>
                     <input type='tel' name='contact1' id='contact1' placeholder='Contato do Responsável/Opcional' className='rounded py-0.5' />
