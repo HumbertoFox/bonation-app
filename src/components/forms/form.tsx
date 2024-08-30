@@ -4,11 +4,19 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { viaCepApi } from '@/app/api/viacep/viacep';
+import AlertMessage from '../alert/alert';
 
 interface TitleValuePage {
     title: string;
     value: string;
     page: string;
+};
+
+interface AlertMessage {
+    message?: string;
+    Error: boolean;
+    title?: string;
+    onClose?: () => void;
 };
 
 // interface Inputs {
@@ -50,10 +58,14 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
     const [age, setAge] = useState<number>(0);
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
+    const [alertMsg, setAlertMsg] = useState<AlertMessage | null>(null);
     const [zipCodeValue, setZipCodeValue] = useState<ZipCodeValue>({ street: '', district: '', city: '' });
     const emailInputRef = useRef<HTMLInputElement>(null);
     const numResidInputRef = useRef<HTMLInputElement>(null);
     const cpfInputRef = useRef<HTMLInputElement>(null);
+    const handleEventAlertClose = () => {
+        setAlertMsg(null);
+    };
     const getCheckedCpf = (data: string) => {
         const isRepeatedCpf = (cpf: string) => {
             const firstDigit = cpf[0];
@@ -112,7 +124,10 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
         if (!element.target.value) {
             clearZipCode();
             emailInputRef.current?.focus();
-            alert('Formato de CEP inválido.');
+            setAlertMsg({
+                Error: true,
+                message: 'Formato de CEP inválido!'
+            });
             return;
         };
         const zipcode = element.target.value.replace(/\D/g, '');
@@ -130,18 +145,27 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 } else {
                     clearZipCode();
                     emailInputRef.current?.focus();
-                    alert('CEP não encontrado.');
+                    setAlertMsg({
+                        Error: true,
+                        message: 'CEP não encontrado!'
+                    });
                 }
             } else {
                 clearZipCode();
                 emailInputRef.current?.focus();
-                alert('Formato de CEP inválido.');
+                setAlertMsg({
+                    Error: true,
+                    message: 'Formato de CEP inválido!'
+                });
             }
         } catch (error) {
             console.error(error);
             clearZipCode();
             emailInputRef.current?.focus();
-            alert(`Formato de CEP inválido ou não encontrado.`);
+            setAlertMsg({
+                Error: true,
+                message: 'Formato de CEP inválido ou não encontrado!'
+            });
             return;
         };
     };
@@ -152,7 +176,10 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
         const cpf = data.cpf as string;
         if (!getCheckedCpf(cpf)) {
             cpfInputRef.current?.focus();
-            alert('CPF Invalido!');
+            setAlertMsg({
+                Error: true,
+                message: 'CPF Invalido!'
+            });
             return;
         };
 
@@ -245,6 +272,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
             }
+            {alertMsg && <AlertMessage {...alertMsg} title='Fechar' onClose={handleEventAlertClose} />}
         </form>
     );
 };
