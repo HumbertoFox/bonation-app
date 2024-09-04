@@ -1,9 +1,5 @@
 'use client';
-
-interface TitleValue {
-    title: string;
-    value: string;
-};
+import { TitleValue } from '@/app/types/types';
 
 export default function FormDonations({ title, value }: TitleValue) {
 

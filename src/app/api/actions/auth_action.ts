@@ -72,5 +72,7 @@ export default async function CreateUser(formData: FormData) {
     } catch (Rrror) {
         console.error(Error);
         return { status: 500, Error: true, message: 'Erro interno do BD!' };
+    } finally {
+        await prisma.$disconnect();
     };
 };
