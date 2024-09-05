@@ -2,7 +2,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import FormFull from '@/components/forms/form';
-
 export default function RgisterUserPage() {
     return (
         <section className='flex flex-col items-center gap-[50px]'>

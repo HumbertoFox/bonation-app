@@ -12,6 +12,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
     const router = useRouter();
     const password = watch('password');
     const [radioSelectHbe, setRadioSelectHbe] = useState<string>('house');
+    const [radioSelectIsBloking, setRadioSelectIsBloking] = useState<string>('false')
     const [age, setAge] = useState<number>(0);
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
@@ -20,9 +21,11 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
         const selectValue = element.target.value;
         setRadioSelectHbe(selectValue);
     };
-    const handleEventAlertClose = () => {
-        setAlertMsg(null);
+    const swapRadioSelectIsBloking = (element: ChangeEvent<HTMLInputElement>) => {
+        const selectValue = element.target.value;
+        setRadioSelectIsBloking(selectValue);
     };
+    const handleEventAlertClose = () => setAlertMsg(null);
     const getCheckedCpf = (data: string) => {
         const isRepeatedCpf = (cpf: string) => {
             const firstDigit = cpf[0];
@@ -152,7 +155,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 </div>
                 }
                 {(page === 'Menu' || page === 'Login') && <input type='text' placeholder={errors.cpf ? 'Campo Obrigatório' : 'CPF'} className={errors.cpf ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cpf', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
-                {page !== 'Login' && <input type='tel' placeholder={`${errors.telephone ? 'Campo Obrigatório' : page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'}`} className={errors.telephone ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('telephone', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
+                {page !== 'Login' && <input type='tel' placeholder={errors.telephone ? 'Campo Obrigatório' : page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'} className={errors.telephone ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('telephone', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
                 {(page === 'Donation' || page === 'Dashboard') && <div className='flex flex-col gap-[5px]'>
                     <input type='tel' placeholder={errors.contact1 ? 'Campo Obrigatório' : 'Contato do Responsável/Opcional'} className={errors.contact1 ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('contact1', { required: true })} />
                     <input type='tel' placeholder={errors.contact2 ? 'Campo Obrigatório' : 'Contato/Opcional ou Ramal'} className='rounded py-0.5' {...register('contact2', { required: true })} />
@@ -208,7 +211,19 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 }
             </fieldset>
             }
+            {title === 'isblocked' && <div className='flex gap-5 justify-center p-1 pt-3.5'>
+                <label htmlFor='isblocked' className='flex items-center cursor-pointer'>
+                    <input type='radio' id='isblocked' value='true' className='mr-1.5' checked={radioSelectIsBloking === 'true' ? true : false} onChange={swapRadioSelectIsBloking} />
+                    Bloquear
+                </label>
+                <label htmlFor='isunblocked' className='flex items-center cursor-pointer'>
+                    <input type='radio' id='isunblocked' value='false' className='mr-1.5' checked={radioSelectIsBloking === 'false' ? true : false} onChange={swapRadioSelectIsBloking} />
+                    Desbloquear
+                </label>
+            </div>
+            }
             {value !== 'Donation' && <div className='flex'>
+                {title === 'isblocked' && <input title={radioSelectIsBloking === 'false' ? 'Desbloquear Usuário' : 'Bloquear Usuário'} type='submit' value={radioSelectIsBloking === 'false' ? 'Desbloquear' : 'Bloquear'} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
                 <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />
                 {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
                 {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}

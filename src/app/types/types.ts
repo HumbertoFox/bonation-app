@@ -45,4 +45,5 @@ export type Inputs = {
     livingapartmentroom?: string;
     referencepoint?: string;
     password?: string;
+    isblocked?: boolean;
 };
