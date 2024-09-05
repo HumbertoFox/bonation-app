@@ -27,7 +27,7 @@ export async function loginAuth(formData: FormData) {
             where: { telephone: user.telephone }
         });
         await createSessionToken({ sub: user.user_id, cpf: user.cpf, email: user_telephone?.email });
-        return { status: 200, Error: false, message: 'Login realizado com sucesso' };
+        return { status: 200, Error: false, message: 'Login realizado com sucesso!' };
     } catch (error) {
         return { status: 500, Error: true, message: 'Erro interno do BD!' };
     } finally {
