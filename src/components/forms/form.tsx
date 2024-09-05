@@ -131,19 +131,19 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
     return (
         <form className='p-1 w-[280px]' onSubmit={handleSubmit(onSubmit)}>
             {title === 'Cadastrar Veículo' && <div className='flex flex-col gap-[5px]'>
-                <input type='text' placeholder='Modelo' className='rounded py-0.5' {...register('modelo', { required: true })} />
-                <input type='text' placeholder='Chassi' className='rounded py-0.5' {...register('chassi', { required: true })} />
-                <input type='text' placeholder='Placa' className='rounded py-0.5' {...register('plate', { required: true })} />
-                <input type='number' placeholder='Km' className='rounded py-0.5' {...register('km', { required: true })} />
+                <input type='text' placeholder={errors.modelo ? 'Campo Obrigatório' : 'Modelo'} className={errors.modelo ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('modelo', { required: true })} />
+                <input type='text' placeholder={errors.chassi ? 'Campo Obrigatório' : 'Chassi'} className={errors.chassi ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('chassi', { required: true })} />
+                <input type='text' placeholder={errors.plate ? 'Campo Obrigatório' : 'Placa'} className={errors.plate ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('plate', { required: true })} />
+                <input type='number' placeholder={errors.km ? 'Campo Obrigatório' : 'Km'} className={errors.km ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('km', { required: true })} />
             </div>
             }
             {title !== 'Cadastrar Veículo' && <fieldset className='flex flex-col gap-[5px]' disabled={value === 'Donation' ? true : false}>
                 {title.includes('Doador') && <legend className='mx-auto py-1 duration-[400ms]'>Informações do Doador</legend>}
                 {title === 'Editar Doador' && <input type='text' disabled placeholder='Código do Doador' className='rounded py-0.5 cursor-not-allowed' {...register('donorcode', { required: true })} />}
-                {title !== 'Entrar' && <input type='text' placeholder='Nome' className='rounded py-0.5' {...register('name', { required: true })} />}
+                {title !== 'Entrar' && <input type='text' placeholder={errors.name ? 'Campo Obrigatório' : 'Nome'} className={errors.name ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('name', { required: true })} />}
                 {page === 'Menu' && <div className='flex gap-1'>
                     <label htmlFor='dateofbirth'>Data de Nascimento
-                        <input type='date' className='w-full rounded py-0.5' {...register('dateofbirth', { required: true, onChange: handleDateChange })} />
+                        <input type='date' className={errors.dateofbirth ? 'w-full rounded py-0.5 border-red-600 placeholder-red-600' : 'w-full rounded py-0.5'} {...register('dateofbirth', { required: true, onChange: handleDateChange })} />
                     </label>
                     <div className='flex flex-col justify-end items-center'>
                         <p>{age}</p>
@@ -151,21 +151,21 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                     </div>
                 </div>
                 }
-                {(page === 'Menu' || page === 'Login') && <input type='text' placeholder='CPF' className='rounded py-0.5' {...register('cpf', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
-                {page !== 'Login' && <input type='tel' placeholder={page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'} className='rounded py-0.5' {...register('telephone', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
+                {(page === 'Menu' || page === 'Login') && <input type='text' placeholder={errors.cpf ? 'Campo Obrigatório' : 'CPF'} className={errors.cpf ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cpf', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
+                {page !== 'Login' && <input type='tel' placeholder={`${errors.telephone ? 'Campo Obrigatório' : page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'}`} className={errors.telephone ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('telephone', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
                 {(page === 'Donation' || page === 'Dashboard') && <div className='flex flex-col gap-[5px]'>
-                    <input type='tel' placeholder='Contato do Responsável/Opcional' className='rounded py-0.5' {...register('contact1', { required: true })} />
-                    <input type='tel' placeholder='Contato/Opcional ou Ramal' className='rounded py-0.5' {...register('contact2', { required: true })} />
+                    <input type='tel' placeholder={errors.contact1 ? 'Campo Obrigatório' : 'Contato do Responsável/Opcional'} className={errors.contact1 ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('contact1', { required: true })} />
+                    <input type='tel' placeholder={errors.contact2 ? 'Campo Obrigatório' : 'Contato/Opcional ou Ramal'} className='rounded py-0.5' {...register('contact2', { required: true })} />
                 </div>
                 }
-                {page === 'Menu' && <input type='email' placeholder='Email' className='rounded py-0.5' {...register('email', { required: true })} />}
-                {title === 'Cadastrar Motorista' && <input type='number' placeholder='CNH' className='rounded py-0.5' {...register('cnh', { required: true, maxLength: 12, pattern: /\d{12}/g })} />}
+                {page === 'Menu' && <input type='email' placeholder={errors.email ? 'Campo Obrigatório' : 'Email'} className={errors.email ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('email', { required: true })} />}
+                {title === 'Cadastrar Motorista' && <input type='number' placeholder={errors.cnh ? 'Campo Obrigatório' : 'CNH'} className={errors.cnh ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnh', { required: true, maxLength: 12, pattern: /\d{12}/g })} />}
                 {title !== 'Entrar' && <div className='flex flex-col gap-[5px]'>
-                    <input type='number' placeholder='CEP' className='rounded py-0.5' {...register('zipcode', { required: true, onBlur: checkedZipCode })} />
-                    <input type='text' placeholder='Logradouro: Av/Rua/Trav' className='rounded py-0.5' {...register('street', { required: true })} />
-                    <input type='text' placeholder='Bairro/Distrito' className='rounded py-0.5' {...register('district', { required: true })} />
-                    <input type='text' placeholder='Cidade' className='rounded py-0.5' {...register('city', { required: true })} />
-                    <input type='text' placeholder='Nº Casa/Edifício' className='rounded py-0.5' {...register('nunresidence', { required: true })} />
+                    <input type='number' placeholder={errors.zipcode ? 'Campo Obrigatório' : 'CEP'} className={errors.zipcode ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('zipcode', { required: true, onBlur: checkedZipCode })} />
+                    <input type='text' placeholder={errors.street ? 'Campo Obrigatório' : 'Logradouro: Av/Rua/Trav'} className={errors.street ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('street', { required: true })} />
+                    <input type='text' placeholder={errors.district ? 'Campo Obrigatório' : 'Bairro/Distrito'} className={errors.district ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('district', { required: true })} />
+                    <input type='text' placeholder={errors.city ? 'Campo Obrigatório' : 'Cidade'} className={errors.city ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('city', { required: true })} />
+                    <input type='text' placeholder={errors.nunresidence ? 'Campo Obrigatório' : 'Nº Casa/Edifício'} className={errors.nunresidence ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('nunresidence', { required: true })} />
                     <div className='flex gap-5 justify-center p-1'>
                         <label htmlFor='house' className='flex items-center cursor-pointer'>
                             <input type='radio' id='house' value='house' className='mr-1.5' checked={radioSelectHbe === 'house' ? true : false} onChange={swapRadioSelectHbe} />
@@ -181,17 +181,17 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                         </label>
                         }
                     </div>
-                    {title.includes('Doador') && <input type='text' placeholder='CNPJ' className='rounded py-0.5' {...register('cnpj', { required: true })} />}
+                    {title.includes('Doador') && <input type='text' placeholder={errors.cnpj ? 'Campo Obrigatório' : 'CNPJ'} className={errors.cnpj ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnpj', { required: true })} />}
                     {radioSelectHbe === 'buildings' && <div className='flex flex-col gap-[5px]'>
-                        <input type='text' placeholder='Nome do Edifício' className='rounded py-0.5' {...register('building', { required: true })} />
-                        <input type='text' placeholder='Bloco' className='rounded py-0.5' {...register('block', { required: true })} />
-                        <input type='text' placeholder='Apartamento/Sala' className='rounded py-0.5' {...register('livingapartmentroom', { required: true })} />
+                        <input type='text' placeholder={errors.building ? 'Campo Obrigatório' : 'Nome do Edifício'} className={errors.building ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('building', { required: true })} />
+                        <input type='text' placeholder={errors.block ? 'Campo Obrigatório' : 'Bloco'} className={errors.block ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('block', { required: true })} />
+                        <input type='text' placeholder={errors.livingapartmentroom ? 'Campo Obrigatório' : 'Apartamento/Sala'} className={errors.livingapartmentroom ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('livingapartmentroom', { required: true })} />
                     </div>}
-                    {title.includes('Doador') && <textarea placeholder='Ponto de Referência' className='rounded py-0.5 h-20' {...register('referencepoint', { required: true })} />}
+                    {title.includes('Doador') && <textarea placeholder={errors.referencepoint ? 'Campo Obrigatório' : 'Ponto de Referência'} className={errors.referencepoint ? 'rounded py-0.5 h-20 border-red-600 placeholder-red-600' : 'rounded py-0.5 h-20'} {...register('referencepoint', { required: true })} />}
                 </div>
                 }
                 {(title === 'Entrar' || title === 'Cadastrar Usuário') && <div>
-                    <input type={ispassword ? 'text' : 'password'} placeholder='Senha' className='w-full rounded py-0.5' autoComplete='off' {...register('password', { required: true })} />
+                    <input type={ispassword ? 'text' : 'password'} placeholder={errors.password ? 'Campo Obrigatório' : 'Senha'} className={errors.password ? 'w-full rounded py-0.5 border-red-600 placeholder-red-600' : 'w-full rounded py-0.5'} autoComplete='off' {...register('password', { required: true })} />
                     <button type='button' className='relative' onClick={handlePassword} >
                         {!ispassword && <FontAwesomeIcon icon={faEye} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
                         {ispassword && <FontAwesomeIcon icon={faEyeSlash} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
@@ -199,7 +199,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 </div>
                 }
                 {title === 'Cadastrar Usuário' && <div>
-                    <input type={ispasswordchecked ? 'text' : 'password'} id='passwordcheck' placeholder='Confirmar Senha' className='w-full rounded py-0.5' autoComplete='off' {...register('passwordchecke', { required: true, validate: (value) => value === password })} />
+                    <input type={ispasswordchecked ? 'text' : 'password'} placeholder={errors.passwordcheck ? 'Campo Obrigatório' : 'Confirmar Senha'} className={errors.passwordcheck ? 'w-full rounded py-0.5 border-red-600 placeholder-red-600' : 'w-full rounded py-0.5'} autoComplete='off' {...register('passwordcheck', { required: true, validate: (value) => value === password })} />
                     <button type='button' className='relative' onClick={handlePasswordChecked} >
                         {!ispasswordchecked && <FontAwesomeIcon icon={faEye} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
                         {ispasswordchecked && <FontAwesomeIcon icon={faEyeSlash} className='absolute bottom-[-1px] left-0.5 text-[grey]' />}
