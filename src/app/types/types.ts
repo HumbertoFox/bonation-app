@@ -16,7 +16,7 @@ export type TitleValuePage = {
 export type AlertMessageState = {
     message?: string;
     Error: boolean;
-    title?: string;
+    page?: string;
     onClose?: () => void;
 };
 export type Inputs = {

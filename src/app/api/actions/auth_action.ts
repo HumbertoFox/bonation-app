@@ -3,7 +3,7 @@ import { createSessionToken } from '../modules/createtoken';
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
-export async function loginAuth(formData: FormData) {
+export async function LoginAuth(formData: FormData) {
     const cpf = formData.get('cpf') as string;
     const password = formData.get('password') as string;
     try {

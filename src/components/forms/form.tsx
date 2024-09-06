@@ -1,11 +1,12 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useState } from 'react';
+import { LoginAuth } from '@/app/api/actions/auth_action';
+import { viaCepApi } from '@/app/api/viacep/viacep';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { viaCepApi } from '@/app/api/viacep/viacep';
-import { AlertMessageState, Inputs, TitleValuePage } from '@/app/types/types';
+import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { AlertMessageState, Inputs, TitleValuePage } from '@/app/types/types';
 import AlertMessage from '../alert/alert';
 export default function FormFull({ title, value, page }: TitleValuePage) {
     const { register, handleSubmit, setValue, setFocus, setError, watch, formState: { errors } } = useForm();
@@ -123,13 +124,56 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
             return;
         };
     };
-    const onSubmit: SubmitHandler<Inputs> = (data: any) => {
-        const cpf = data.cpf as string;
-        if (!getCheckedCpf(cpf)) {
-            setError('cpf', { type: 'focus' }, { shouldFocus: true });
-            return;
+    const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
+        if (page !== 'Login') {
+            const cpf = data.cpf as string;
+            if (!getCheckedCpf(cpf)) {
+                setError('cpf', { type: 'focus' }, { shouldFocus: true });
+                return;
+            };
         };
-        console.log(data);
+        try {
+            const formData = new FormData();
+            Object.keys(data).forEach(key => {
+                formData.append(key, data[key as keyof Inputs]);
+            });
+            let response;
+            switch (page) {
+                case 'Login':
+                    response = await LoginAuth(formData)
+                    break;
+            };
+            if (page === 'Login') {
+                if (response?.Error === false) {
+                    setTimeout(() => {
+                        router.push('/dashboard');
+                    }, 3000);
+                    setAlertMsg(response);
+                } else if (response?.Error === true) {
+                    setAlertMsg(response);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                };
+            };
+        } catch (error) {
+            if (page === 'Login') {
+                console.error('Erro ao Conectar ao Banco:', error);
+                setAlertMsg({
+                    Error: true,
+                    message: 'Erro ao Conectar ao Banco!'
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            } else {
+                console.error('Erro ao Conectar ao Banco:', error);
+                setAlertMsg({
+                    Error: true,
+                    message: 'Erro ao Conectar ao Banco!'
+                });
+            };
+        };
     };
     return (
         <form className='p-1 w-[280px]' onSubmit={handleSubmit(onSubmit)}>
@@ -229,7 +273,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
             }
-            {alertMsg && <AlertMessage {...alertMsg} title='Fechar' onClose={handleEventAlertClose} />}
+            {alertMsg && <AlertMessage {...alertMsg} page={page} onClose={handleEventAlertClose} />}
         </form>
     );
 };
