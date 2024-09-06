@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { LoginAuth } from '@/app/api/actions/auth_action';
 import { viaCepApi } from '@/app/api/viacep/viacep';
-import { CreateUser } from '@/app/api/actions/createuser';
+import { CreateUser } from '@/app/api/actions/create_user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, useState } from 'react';

@@ -5,10 +5,7 @@ import { openSessionToken } from './opentoken';
 export async function createSessionToken(payload = {}) {
     try {
         const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
-        const sessiontoken = await new jose.SignJWT(payload)
-            .setProtectedHeader({ alg: 'HS256' })
-            .setExpirationTime('1d')
-            .sign(secret);
+        const sessiontoken = await new jose.SignJWT(payload).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
         const { exp } = await openSessionToken(sessiontoken);
         cookies().set('sessiontoken', sessiontoken, {
             path: '/',

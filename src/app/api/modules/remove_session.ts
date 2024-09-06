@@ -1,5 +1,5 @@
 'use server';
 import { cookies } from 'next/headers';
-export function destroySession() {
+export async function RemoveSessionToken() {
     cookies().delete('sessiontoken');
 };

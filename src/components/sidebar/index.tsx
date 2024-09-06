@@ -6,7 +6,6 @@ import { faPenToSquare, faUserPlus, faSquarePen, faUserPen, faCalendarPlus, faCa
 import EnterpriseImg from '@/assets/LOGOBFN-INTER.png';
 import Image from 'next/image';
 import Link from 'next/link';
-
 export default function SideBar() {
     const [navMenuLink, setNavMenuLink] = useState<string>('');
     const router = useRouter();
@@ -14,9 +13,7 @@ export default function SideBar() {
         setNavMenuLink(element);
         localStorage.setItem('activeMenuLinkSelection', element);
     };
-    const linkClass = (linkName: string) => 
-        `flex items-center p-2.5 gap-[15px] duration-[400ms] ${navMenuLink === linkName ? 'bg-[#79D1FF] text-white hover:text-[black]' : 'hover:text-[#79D1FF]'}`;
-
+    const linkClass = (linkName: string) => `flex items-center p-2.5 gap-[15px] duration-[400ms] ${navMenuLink === linkName ? 'bg-[#79D1FF] text-white hover:text-[black]' : 'hover:text-[#79D1FF]'}`;
     useEffect(() => {
         const activeMenuLinkSelection = localStorage.getItem('activeMenuLinkSelection');
         if (activeMenuLinkSelection !== null) {
@@ -41,7 +38,6 @@ export default function SideBar() {
             router.push('/dashboard/underconstruction');
         };
     }, [router]);
-
     return (
         <div className='w-[200px] h-full flex flex-col fixed border-r-[3px] border-[#79D1FF] bg-[#AAF998] duration-[400ms] overflow-hidden max-[1080px]:w-[70px]'>
             <Link href={'/menu'} className='max-w-[150px] mx-auto duration-[400ms]'>
@@ -97,7 +93,7 @@ export default function SideBar() {
                     </Link>
                 </div>
                 <div className=' duration-[400ms] mt-4'>
-                    <Link href={'/login'} className='flex items-center p-2.5 gap-[15px] duration-[400ms] hover:text-[white] active:bg-[#79D1FF]'>
+                    <Link href={'/logout'} className='flex items-center p-2.5 gap-[15px] duration-[400ms] hover:text-[white] active:bg-[#79D1FF]'>
                         <FontAwesomeIcon icon={faRightFromBracket} className='text-[2rem] rotate-180' />
                         <span className='max-[1080px]:hidden'>Sair do Sistema</span>
                     </Link>
