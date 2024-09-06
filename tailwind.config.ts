@@ -1,10 +1,9 @@
 import type { Config } from "tailwindcss";
-
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
     extend: {
@@ -22,7 +21,7 @@ const config: Config = {
         'alert-blue': 'hsla(205.46, 86.5%, 46.47%, .7)'
       },
       boxShadow: {
-        '3xm': '0 35px 60px -15px hsla(120, 73.44%, 74.9%, .5)',
+        '3xm': '0 35px 60px -15px hsla(120, 73.44%, 74.9%, .5)'
       }
     }
   },
