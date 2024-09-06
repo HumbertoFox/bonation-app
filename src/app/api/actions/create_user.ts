@@ -1,5 +1,5 @@
 'use server';
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 export async function CreateUser(formData: FormData) {
