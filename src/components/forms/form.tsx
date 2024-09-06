@@ -2,14 +2,15 @@
 import { useRouter } from 'next/navigation';
 import { LoginAuth } from '@/app/api/actions/auth_action';
 import { viaCepApi } from '@/app/api/viacep/viacep';
+import { CreateUser } from '@/app/api/actions/createuser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { AlertMessageState, Inputs, TitleValuePage } from '@/app/types/types';
+import { AlertMessageState, FormFullValues, Inputs } from '@/app/types/types';
 import AlertMessage from '../alert/alert';
-export default function FormFull({ title, value, page }: TitleValuePage) {
-    const { register, handleSubmit, setValue, setFocus, setError, watch, formState: { errors } } = useForm();
+export default function FormFull({ title, value, page, subpage }: FormFullValues) {
+    const { register, handleSubmit, setValue, setFocus, setError, watch, reset, formState: { errors } } = useForm();
     const router = useRouter();
     const password = watch('password');
     const [radioSelectHbe, setRadioSelectHbe] = useState<string>('house');
@@ -125,7 +126,7 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
         };
     };
     const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
-        if (page !== 'Login') {
+        if (subpage !== 'login') {
             const cpf = data.cpf as string;
             if (!getCheckedCpf(cpf)) {
                 setError('cpf', { type: 'focus' }, { shouldFocus: true });
@@ -138,12 +139,15 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                 formData.append(key, data[key as keyof Inputs]);
             });
             let response;
-            switch (page) {
-                case 'Login':
+            switch (subpage) {
+                case 'login':
                     response = await LoginAuth(formData)
                     break;
+                case 'registeruser':
+                    response = await CreateUser(formData)
+                    break;
             };
-            if (page === 'Login') {
+            if (subpage === 'login') {
                 if (response?.Error === false) {
                     setTimeout(() => {
                         router.push('/dashboard');
@@ -155,9 +159,16 @@ export default function FormFull({ title, value, page }: TitleValuePage) {
                         window.location.reload();
                     }, 3000);
                 };
+            } else {
+                if (response?.Error === false) {
+                    reset();
+                    setAlertMsg(response);
+                } else if (response?.Error === true) {
+                    setAlertMsg(response);
+                };
             };
         } catch (error) {
-            if (page === 'Login') {
+            if (subpage === 'login') {
                 console.error('Erro ao Conectar ao Banco:', error);
                 setAlertMsg({
                     Error: true,

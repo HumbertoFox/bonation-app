@@ -2,7 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
-export default async function CreateUser(formData: FormData) {
+export async function CreateUser(formData: FormData) {
     const name = formData.get('name') as string;
     const dateofbirth = formData.get('dateofbirth') as string;
     const cpf = formData.get('cpf') as string;

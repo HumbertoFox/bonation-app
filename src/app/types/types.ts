@@ -8,10 +8,11 @@ export type TitleValue = {
     title: string;
     value: string;
 };
-export type TitleValuePage = {
+export type FormFullValues = {
     title: string;
     value: string;
     page: string;
+    subpage: string;
 };
 export type AlertMessageState = {
     message?: string;
