@@ -12,9 +12,13 @@ const config: Config = {
         'calc-sidebarmin': 'calc(100% - 70px)'
       },
       keyframes: {
-        alertmsg: {
+        alertmsgDown: {
           '0%': { opacity: '0', transform: 'translate3d(0, -100%, 0)' },
           '100%': { opacity: '1' }
+        },
+        alertmsgUp: {
+          '0%': { opacity: '1', transform: 'translate3d(0, 0, 0)' },
+          '100%': { opacity: '0', transform: 'translate3d(0, -100%, 0)' }
         }
       },
       colors: {

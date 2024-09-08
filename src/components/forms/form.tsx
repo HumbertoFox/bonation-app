@@ -97,7 +97,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                     setValue('street', data.logradouro);
                     setValue('district', data.bairro);
                     setValue('city', data.localidade);
-                    setFocus('nunresidence');
+                    setFocus('numresidence');
                 } else {
                     clearZipCode();
                     setFocus('email');
@@ -126,7 +126,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
         };
     };
     const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
-        if (subpage !== 'login') {
+        if (page === 'menu') {
             const cpf = data.cpf as string;
             if (!getCheckedCpf(cpf)) {
                 setError('cpf', { type: 'focus' }, { shouldFocus: true });
@@ -140,14 +140,18 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             });
             let response;
             switch (subpage) {
-                case 'login':
+                case 'Login':
                     response = await LoginAuth(formData)
                     break;
-                case 'registeruser':
+                case 'Registeruser':
                     response = await CreateUser(formData)
                     break;
+                case 'Registerdonor':
+                    console.log(data);
+                    // response = await CreateUser(formData)
+                    break;
             };
-            if (subpage === 'login') {
+            if (subpage === 'Login') {
                 if (response?.Error === false) {
                     setTimeout(() => {
                         router.push('/dashboard');
@@ -168,7 +172,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                 };
             };
         } catch (error) {
-            if (subpage === 'login') {
+            if (subpage === 'Login') {
                 console.error('Erro ao Conectar ao Banco:', error);
                 setAlertMsg({
                     Error: true,
@@ -211,9 +215,9 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                 }
                 {(page === 'Menu' || page === 'Login') && <input type='text' placeholder={errors.cpf ? 'Campo Obrigatório' : 'CPF'} className={errors.cpf ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cpf', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
                 {page !== 'Login' && <input type='tel' placeholder={errors.telephone ? 'Campo Obrigatório' : page !== 'Menu' ? 'Contato do Responsável' : 'Telefone'} className={errors.telephone ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('telephone', { required: true, maxLength: 11, pattern: /\d{11}/g })} />}
-                {(page === 'Donation' || page === 'Dashboard') && <div className='flex flex-col gap-[5px]'>
+                {(page === 'Dashboard') && <div className='flex flex-col gap-[5px]'>
                     <input type='tel' placeholder={errors.contact1 ? 'Campo Obrigatório' : 'Contato do Responsável/Opcional'} className={errors.contact1 ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('contact1', { required: true })} />
-                    <input type='tel' placeholder={errors.contact2 ? 'Campo Obrigatório' : 'Contato/Opcional ou Ramal'} className='rounded py-0.5' {...register('contact2', { required: true })} />
+                    <input type='tel' placeholder='Contato/Opcional ou Ramal' className='rounded py-0.5' {...register('contact2')} />
                 </div>
                 }
                 {page === 'Menu' && <input type='email' placeholder={errors.email ? 'Campo Obrigatório' : 'Email'} className={errors.email ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('email', { required: true })} />}
@@ -223,29 +227,30 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                     <input type='text' placeholder={errors.street ? 'Campo Obrigatório' : 'Logradouro: Av/Rua/Trav'} className={errors.street ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('street', { required: true })} />
                     <input type='text' placeholder={errors.district ? 'Campo Obrigatório' : 'Bairro/Distrito'} className={errors.district ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('district', { required: true })} />
                     <input type='text' placeholder={errors.city ? 'Campo Obrigatório' : 'Cidade'} className={errors.city ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('city', { required: true })} />
-                    <input type='text' placeholder={errors.nunresidence ? 'Campo Obrigatório' : 'Nº Casa/Edifício'} className={errors.nunresidence ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('nunresidence', { required: true })} />
+                    <input type='text' placeholder={errors.numresidence ? 'Campo Obrigatório' : 'Nº Casa/Edifício'} className={errors.numresidence ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('numresidence', { required: true })} />
                     <div className='flex gap-5 justify-center p-1'>
                         <label htmlFor='house' className='flex items-center cursor-pointer'>
-                            <input type='radio' id='house' value='house' className='mr-1.5' checked={radioSelectHbe === 'house' ? true : false} onChange={swapRadioSelectHbe} />
+                            <input type='radio' id='house' value='house' className='mr-1.5' defaultChecked {...register('typeresidence', { onChange: swapRadioSelectHbe })} />
                             Casa
                         </label>
                         <label htmlFor='buildings' className='flex items-center cursor-pointer'>
-                            <input type='radio' id='buildings' value='buildings' className='mr-1.5' checked={radioSelectHbe === 'buildings' ? true : false} onChange={swapRadioSelectHbe} />
+                            <input type='radio' id='buildings' value='buildings' className='mr-1.5' {...register('typeresidence')} />
                             Edifício
                         </label>
                         {title.includes('Doador') && <label htmlFor='enterprise' className='flex items-center cursor-pointer'>
-                            <input type='radio' id='enterprise' value='enterprise' className='mr-1.5' checked={radioSelectHbe === 'enterprise' ? true : false} onChange={swapRadioSelectHbe} />
+                            <input type='radio' id='enterprise' value='enterprise' className='mr-1.5' {...register('typeresidence')} />
                             Empresa
                         </label>
                         }
                     </div>
-                    {title.includes('Doador') && <input type='text' placeholder={errors.cnpj ? 'Campo Obrigatório' : 'CNPJ'} className={errors.cnpj ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnpj', { required: true })} />}
-                    {radioSelectHbe === 'buildings' && <div className='flex flex-col gap-[5px]'>
+                    {radioSelectHbe === 'enterprise' && <input type='text' placeholder={errors.cnpj ? 'Campo Obrigatório' : 'CNPJ'} className={errors.cnpj ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnpj', { required: true })} />}
+                    {radioSelectHbe !== 'house' && <div className='flex flex-col gap-[5px]'>
+                        {radioSelectHbe === 'enterprise' && <input type='text' placeholder={errors.enterprise ? 'Campo Obrigatório' : 'Nome Empresa'} className={errors.enterprise ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('enterprise', { required: true })} />}
                         <input type='text' placeholder={errors.building ? 'Campo Obrigatório' : 'Nome do Edifício'} className={errors.building ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('building', { required: true })} />
                         <input type='text' placeholder={errors.block ? 'Campo Obrigatório' : 'Bloco'} className={errors.block ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('block', { required: true })} />
                         <input type='text' placeholder={errors.livingapartmentroom ? 'Campo Obrigatório' : 'Apartamento/Sala'} className={errors.livingapartmentroom ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('livingapartmentroom', { required: true })} />
                     </div>}
-                    {title.includes('Doador') && <textarea placeholder={errors.referencepoint ? 'Campo Obrigatório' : 'Ponto de Referência'} className={errors.referencepoint ? 'rounded py-0.5 h-20 border-red-600 placeholder-red-600' : 'rounded py-0.5 h-20'} {...register('referencepoint', { required: true })} />}
+                    {page === 'Dashboard' && <textarea placeholder={errors.referencepoint ? 'Campo Obrigatório' : 'Ponto de Referência'} className={errors.referencepoint ? 'rounded py-0.5 h-20 border-red-600 placeholder-red-600' : 'rounded py-0.5 h-20'} {...register('referencepoint', { required: true })} />}
                 </div>
                 }
                 {(title === 'Entrar' || title === 'Cadastrar Usuário') && <div>

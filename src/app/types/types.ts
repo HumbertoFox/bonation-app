@@ -35,6 +35,7 @@ export type Inputs = {
     email?: string;
     cnh?: number;
     zipcode?: string;
+    typeresidence?: string;
     nunresidence?: string;
     street?: string;
     district?: string;

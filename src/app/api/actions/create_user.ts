@@ -9,10 +9,11 @@ export async function CreateUser(formData: FormData) {
     const telephone = formData.get('telephone') as string;
     const email = formData.get('email') as string;
     const zipcode = formData.get('zipcode') as string;
+    const typeresidence = formData.get('typeresidence') as string;
     const street = formData.get('street') as string;
     const district = formData.get('district') as string;
     const city = formData.get('city') as string;
-    const nunresidence = formData.get('nunresidence') as string;
+    const numresidence = formData.get('numresidence') as string;
     const building = formData.get('building') as string;
     const block = formData.get('block') as string;
     const livingapartmentroom = formData.get('livingapartmentroom') as string;
@@ -27,7 +28,7 @@ export async function CreateUser(formData: FormData) {
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
         const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
         let existingAddress = await prisma.address.findFirst({
-            where: { zipcode, nunresidence, building, block, livingapartmentroom }
+            where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
         });
         if (!exitingCpf) {
             await prisma.cpf.create({
@@ -46,7 +47,7 @@ export async function CreateUser(formData: FormData) {
         };
         if (!existingAddress) {
             existingAddress = await prisma.address.create({
-                data: { zipcode, nunresidence, building, block, livingapartmentroom }
+                data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
             });
         };
         await prisma.user.create({

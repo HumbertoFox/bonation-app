@@ -7,7 +7,7 @@ export default function RegisterDonationPage() {
         <div className='flex duration-[400ms] max-md:flex-col'>
             <div>
                 <FormSearchs search='Pesquisar Doador' />
-                <FormFull title='Editar Doador' value='Donation' page='Donation' subpage='registerdonation' />
+                <FormFull title='Editar Doador' value='Donation' page='Dashboard' subpage='registerdonation' />
             </div>
             <FormDonations title='Cadastrar Doação' value='Cadastrar' />
         </div>
