@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { LoginAuth } from '@/app/api/actions/auth_action';
 import { viaCepApi } from '@/app/api/viacep/viacep';
 import { CreateUser } from '@/app/api/actions/create_user';
+import { CreateDonor } from '@/app/api/actions/create_donor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, useState } from 'react';
@@ -22,6 +23,11 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
     const swapRadioSelectHbe = (element: ChangeEvent<HTMLInputElement>) => {
         const selectValue = element.target.value;
         setRadioSelectHbe(selectValue);
+        setValue('building', selectValue === 'house' ? '...' : '');
+        setValue('block', selectValue === 'house' ? '...' : '');
+        setValue('livingapartmentroom', selectValue === 'house' ? '...' : '');
+        setValue('enterprise', selectValue !== 'enterprise' ? '...' : '');
+        setValue('cnpj', selectValue !== 'enterprise' ? '...' : '');
     };
     const swapRadioSelectIsBloking = (element: ChangeEvent<HTMLInputElement>) => {
         const selectValue = element.target.value;
@@ -147,8 +153,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                     response = await CreateUser(formData)
                     break;
                 case 'Registerdonor':
-                    console.log(data);
-                    // response = await CreateUser(formData)
+                    response = await CreateDonor(formData)
                     break;
             };
             if (subpage === 'Login') {
@@ -245,7 +250,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                     </div>
                     {radioSelectHbe === 'enterprise' && <input type='text' placeholder={errors.cnpj ? 'Campo Obrigatório' : 'CNPJ'} className={errors.cnpj ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnpj', { required: true })} />}
                     {radioSelectHbe !== 'house' && <div className='flex flex-col gap-[5px]'>
-                        {radioSelectHbe === 'enterprise' && <input type='text' placeholder={errors.enterprise ? 'Campo Obrigatório' : 'Nome Empresa'} className={errors.enterprise ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('enterprise', { required: true })} />}
+                        {radioSelectHbe === 'enterprise' && <input type='text' placeholder={errors.corporatename ? 'Campo Obrigatório' : 'Razão Social'} className={errors.corporatename ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('corporatename', { required: true })} />}
                         <input type='text' placeholder={errors.building ? 'Campo Obrigatório' : 'Nome do Edifício'} className={errors.building ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('building', { required: true })} />
                         <input type='text' placeholder={errors.block ? 'Campo Obrigatório' : 'Bloco'} className={errors.block ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('block', { required: true })} />
                         <input type='text' placeholder={errors.livingapartmentroom ? 'Campo Obrigatório' : 'Apartamento/Sala'} className={errors.livingapartmentroom ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('livingapartmentroom', { required: true })} />
@@ -273,11 +278,11 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             }
             {title === 'isblocked' && <div className='flex gap-5 justify-center p-1 pt-3.5'>
                 <label htmlFor='isblocked' className='flex items-center cursor-pointer'>
-                    <input type='radio' id='isblocked' value='true' className='mr-1.5' checked={radioSelectIsBloking === 'true' ? true : false} onChange={swapRadioSelectIsBloking} />
+                    <input type='radio' id='isblocked' value='true' className='mr-1.5' {...register('isblocked', { onChange: swapRadioSelectIsBloking })} />
                     Bloquear
                 </label>
                 <label htmlFor='isunblocked' className='flex items-center cursor-pointer'>
-                    <input type='radio' id='isunblocked' value='false' className='mr-1.5' checked={radioSelectIsBloking === 'false' ? true : false} onChange={swapRadioSelectIsBloking} />
+                    <input type='radio' id='isunblocked' value='false' className='mr-1.5' defaultChecked {...register('isblocked')} />
                     Desbloquear
                 </label>
             </div>

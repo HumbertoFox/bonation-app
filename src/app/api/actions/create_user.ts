@@ -54,8 +54,8 @@ export async function CreateUser(formData: FormData) {
             data: { cpf, telephone, password: hashPassword, address_id: existingAddress.address_id }
         });
         return { status: 200, Error: false, message: 'Usuário cadastrado com Sucesso!' };
-    } catch (Rrror) {
-        console.error(Error);
+    } catch (error) {
+        console.error(error);
         return { status: 500, Error: true, message: 'Erro interno do BD!' };
     } finally {
         await prisma.$disconnect();
