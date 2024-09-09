@@ -132,7 +132,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
         };
     };
     const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
-        if (page === 'menu') {
+        if (page === 'Menu') {
             const cpf = data.cpf as string;
             if (!getCheckedCpf(cpf)) {
                 setError('cpf', { type: 'focus' }, { shouldFocus: true });

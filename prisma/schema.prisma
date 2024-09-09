@@ -107,6 +107,14 @@ model Donation {
   @@map("Donations")
 }
 
+model Object {
+  object_id Int    @unique @default(autoincrement())
+  object    String
+  amount    String
+
+  @@map("Objects")
+}
+
 model Enterprise {
   cnpj             String   @id @db.VarChar(20)
   corporatename    String

@@ -49,3 +49,6 @@ export type Inputs = {
     password?: string;
     isblocked?: boolean;
 };
+export type InputsDonations = {
+    coddonation?: number;
+}

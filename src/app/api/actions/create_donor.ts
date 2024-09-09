@@ -11,7 +11,7 @@ export async function CreateDonor(formData: FormData) {
         const { cpf } = await openSessionToken(value);
         userCpf = cpf;
     };
-    const existingUser = await prisma.user.findFirst({ where: { cpf: userCpf, isblocked: true } });
+    const existingUser = await prisma.user.findFirst({ where: { cpf: userCpf, isblocked: false } });
     if (!existingUser) {
         return { status: 401, Error: true, message: 'Usuário não autenticado!' };
     };
@@ -37,7 +37,6 @@ export async function CreateDonor(formData: FormData) {
         };
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
         const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
-        const existingEnterprise = await prisma.enterprise.findUnique({ where: { cnpj } });
         let existingAddress = await prisma.address.findFirst({
             where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
         });
@@ -47,9 +46,12 @@ export async function CreateDonor(formData: FormData) {
         if (!existingZipcode) {
             await prisma.zipcode.create({ data: { zipcode, street, district, city } });
         };
-        if (!existingEnterprise && cnpj !== '') {
-            await prisma.enterprise.create({ data: { cnpj, corporatename } });
-        }
+        if (cnpj) {
+            const existingEnterprise = await prisma.enterprise.findUnique({ where: { cnpj } });
+            if (!existingEnterprise && cnpj !== '') {
+                await prisma.enterprise.create({ data: { cnpj, corporatename } });
+            };
+        };
         if (!existingAddress) {
             existingAddress = await prisma.address.create({
                 data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
@@ -58,6 +60,7 @@ export async function CreateDonor(formData: FormData) {
         await prisma.donor.create({
             data: { name, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id, cnpj }
         });
+        return { status: 200, Error: false, message: 'Doador Cadastrado com sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro interno do BD!' };

@@ -1,15 +1,18 @@
 'use client';
-import { TitleValue } from '@/app/types/types';
-
+import { InputsDonations, TitleValue } from '@/app/types/types';
+import { SubmitHandler, useForm } from 'react-hook-form';
 export default function FormDonations({ title, value }: TitleValue) {
-
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit: SubmitHandler<InputsDonations> = async (data: any) => {
+        console.log(data);
+    };
     return (
-        <form className='w-[750px] p-1 max-xl:w-[380px] max-md:w-[280px]'>
+        <form className='w-[750px] p-1 max-xl:w-[380px] max-md:w-[280px]' onSubmit={handleSubmit(onSubmit)}>
             <fieldset className='flex flex-col gap-[5px]'>
                 <legend className='mx-auto py-1 duration-[400ms]'>Lista de objetos a serem doados</legend>
                 <div className='flex gap-[5px] max-xl:flex-col'>
                     <label htmlFor='coddonation' className='flex flex-col'>Código da Doação
-                        <input type='text' id='coddonation' disabled placeholder='Código da Doação' className='rounded py-0.5 cursor-not-allowed' />
+                        <input type='text' id='coddonation' disabled placeholder='Código da Doação' className='rounded py-0.5 cursor-not-allowed' {...register('coddonation')} />
                     </label>
                     <label htmlFor='donorcode' className='flex flex-col'>Código do Doador
                         <input type='text' id='donorcode' placeholder='Código do Doador' disabled className='rounded py-0.5 cursor-not-allowed' />

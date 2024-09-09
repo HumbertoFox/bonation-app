@@ -7,7 +7,7 @@ export default function RegisterDriverPage() {
         <section className='flex flex-col items-center gap-[50px]'>
             <h1 className='text-blue-600 font-bold text-xl'>Cadastrar Motorista</h1>
             <FontAwesomeIcon icon={faIdCard} className='text-[75px] text-[green]' />
-            <FormFull title='Cadastrar Motorista' value='Cadastrar' page='Menu' subpage='registerdriver' />
+            <FormFull title='Cadastrar Motorista' value='Cadastrar' page='Menu' subpage='Registerdriver' />
         </section>
     );
 };
