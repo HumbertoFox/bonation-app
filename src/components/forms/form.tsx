@@ -205,7 +205,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             </div>
             }
             {title !== 'Cadastrar Veículo' && <fieldset className='flex flex-col gap-[5px]' disabled={value === 'Donation' ? true : false}>
-                {title.includes('Doador') && <legend className='mx-auto py-1 duration-[400ms]'>Informações do Doador</legend>}
+                {title.includes('Doador') && <legend className='mx-auto py-1 duration-[400ms] drop-shadow-[1px_1px_0.5px_#AAF998]'>Informações do Doador</legend>}
                 {title === 'Editar Doador' && <input type='text' disabled placeholder='Código do Doador' className='rounded py-0.5 cursor-not-allowed' {...register('donorcode', { required: true })} />}
                 {title !== 'Entrar' && <input type='text' placeholder={errors.name ? 'Campo Obrigatório' : 'Nome'} className={errors.name ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('name', { required: true })} />}
                 {page === 'Menu' && <div className='flex gap-1'>
@@ -288,10 +288,10 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             </div>
             }
             {value !== 'Donation' && <div className='flex'>
-                {title === 'isblocked' && <input title={radioSelectIsBloking === 'false' ? 'Desbloquear Usuário' : 'Bloquear Usuário'} type='submit' value={radioSelectIsBloking === 'false' ? 'Desbloquear' : 'Bloquear'} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
-                <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />
-                {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
-                {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold p-2 duration-[400ms] cursor-pointer mx-auto rounded hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
+                {title === 'isblocked' && <input title={radioSelectIsBloking === 'false' ? 'Desbloquear Usuário' : 'Bloquear Usuário'} type='submit' value={radioSelectIsBloking === 'false' ? 'Desbloquear' : 'Bloquear'} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
+                <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />
+                {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
+                {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
             }
             {alertMsg && <AlertMessage {...alertMsg} page={page} onClose={handleEventAlertClose} />}
