@@ -16,6 +16,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
     const password = watch('password');
     const [radioSelectHbe, setRadioSelectHbe] = useState<string>('house');
     const [radioSelectIsBloking, setRadioSelectIsBloking] = useState<string>('false')
+    const [goToDonation, setGoToDonation] = useState<boolean>(false);
     const [age, setAge] = useState<number>(0);
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
@@ -147,13 +148,13 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             let response;
             switch (subpage) {
                 case 'Login':
-                    response = await LoginAuth(formData)
+                    response = await LoginAuth(formData);
                     break;
                 case 'Registeruser':
-                    response = await CreateUser(formData)
+                    response = await CreateUser(formData);
                     break;
                 case 'Registerdonor':
-                    response = await CreateDonor(formData)
+                    response = await CreateDonor(formData);
                     break;
             };
             if (subpage === 'Login') {
@@ -172,6 +173,9 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                 if (response?.Error === false) {
                     reset();
                     setAlertMsg(response);
+                    goToDonation && setTimeout(() => {
+                        router.push('registerdonation');
+                    }, 1000);
                 } else if (response?.Error === true) {
                     setAlertMsg(response);
                 };
@@ -288,13 +292,13 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             </div>
             }
             {value !== 'Donation' && <div className='flex'>
-                {title === 'isblocked' && <input title={radioSelectIsBloking === 'false' ? 'Desbloquear Usuário' : 'Bloquear Usuário'} type='submit' value={radioSelectIsBloking === 'false' ? 'Desbloquear' : 'Bloquear'} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
-                <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />
-                {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3' />}
-                {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 active:bg-blue-600 active:text-black mt-3'>Menu</button>}
+                {title === 'isblocked' && <input title={radioSelectIsBloking === 'false' ? 'Desbloquear Usuário' : 'Bloquear Usuário'} type='submit' value={radioSelectIsBloking === 'false' ? 'Desbloquear' : 'Bloquear'} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />}
+                <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
+                {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' onClick={() => setGoToDonation(true)} />}
+                {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
             }
-            {alertMsg && <AlertMessage {...alertMsg} page={page} onClose={handleEventAlertClose} />}
+            {alertMsg && <AlertMessage {...alertMsg} page={page} clickDonation={goToDonation} onClose={handleEventAlertClose} />}
         </form>
     );
 };
