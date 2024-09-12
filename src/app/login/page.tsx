@@ -8,7 +8,7 @@ export default function LoginPage() {
             <section className='flex flex-col justify-center items-center gap-[3.125rem] p-[30px] border border-[blue] rounded-[15px]'>
                 <h1 className='text-blue-600 font-bold text-xl'>Usuário do Sistema</h1>
                 <FontAwesomeIcon icon={faUserCheck} className='text-[75px] text-[green]' />
-                <FormFull title='Entrar' value='Entrar' page='Login' subpage='Login' />
+                <FormFull title='Entrar' value='Entrar' page='Login' subpage='Login' searchDonorCodTel />
             </section>
         </main>
     );
