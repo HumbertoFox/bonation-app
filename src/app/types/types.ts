@@ -8,7 +8,10 @@ export type InputSearch = {
 export type TitleValue = {
     title: string;
     value: string;
-};
+    searchDonationCod: {
+        coddonation: string;
+    } | any;
+}
 export type FormFullValues = {
     title: string;
     value: string;
@@ -91,4 +94,7 @@ export type CodTelResponse = {
     block?: string;
     livingapartmentroom?: string;
     referencepoint?: string;
+}
+export type CodResponse = {
+    coddonation?: string;
 }
