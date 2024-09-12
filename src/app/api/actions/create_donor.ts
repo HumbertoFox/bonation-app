@@ -30,6 +30,7 @@ export async function CreateDonor(formData: FormData) {
     const building = formData.get('building') as string;
     const block = formData.get('block') as string;
     const livingapartmentroom = formData.get('livingapartmentroom') as string;
+    const referencepoint = formData.get('referencepoint') as string;
     try {
         const existingDonor = await prisma.donor.findFirst({ where: { telephone } });
         if (existingDonor) {
@@ -54,7 +55,7 @@ export async function CreateDonor(formData: FormData) {
         };
         if (!existingAddress) {
             existingAddress = await prisma.address.create({
-                data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
+                data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
             });
         };
         await prisma.donor.create({

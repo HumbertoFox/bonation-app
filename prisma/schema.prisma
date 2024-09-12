@@ -61,6 +61,7 @@ model Address {
   address_id          Int        @id @default(autoincrement())
   zipcode             String
   numresidence        String     @db.VarChar(50)
+  referencepoint      String?
   typeresidence       String
   building            String?    @db.VarChar(100)
   block               String?    @db.VarChar(50)

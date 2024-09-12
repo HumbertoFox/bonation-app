@@ -1,8 +1,9 @@
 export type FormSearch = {
     search: string;
+    searchDonorCodTel: (result: any) => void;
 };
 export type InputSearch = {
-    search?: string;
+    codtel?: string;
 };
 export type TitleValue = {
     title: string;
@@ -13,6 +14,25 @@ export type FormFullValues = {
     value: string;
     page: string;
     subpage: string;
+    searchDonorCodTel: {
+        donorcode: string;
+        name: string;
+        telephone: string;
+        contact1: string;
+        contact2: string;
+        zipcode: string;
+        typeresidence: string;
+        nunresidence: string;
+        street: string;
+        district: string;
+        city: string;
+        residence: string;
+        cnpj: string;
+        building: string;
+        block: string;
+        livingapartmentroom: string;
+        referencepoint: string;
+    } | any;
 };
 export type AlertMessageState = {
     message?: string;
@@ -52,4 +72,23 @@ export type Inputs = {
 };
 export type InputsDonations = {
     coddonation?: number;
+}
+export type CodTelResponse = {
+    donorcode?: string;
+    name?: string;
+    telephone?: string;
+    contact1?: string;
+    contact2?: string;
+    zipcode?: string;
+    typeresidence?: string;
+    nunresidence?: string;
+    street?: string;
+    district?: string;
+    city?: string;
+    residence?: string;
+    cnpj?: string;
+    building?: string;
+    block?: string;
+    livingapartmentroom?: string;
+    referencepoint?: string;
 }

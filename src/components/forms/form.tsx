@@ -6,11 +6,11 @@ import { CreateUser } from '@/app/api/actions/create_user';
 import { CreateDonor } from '@/app/api/actions/create_donor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { ChangeEvent, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { AlertMessageState, FormFullValues, Inputs } from '@/app/types/types';
 import AlertMessage from '../alert/alert';
-export default function FormFull({ title, value, page, subpage }: FormFullValues) {
+export default function FormFull({ title, value, page, subpage, searchDonorCodTel }: FormFullValues) {
     const { register, handleSubmit, setValue, setFocus, setError, watch, reset, formState: { errors } } = useForm();
     const router = useRouter();
     const password = watch('password');
@@ -24,11 +24,6 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
     const swapRadioSelectHbe = (element: ChangeEvent<HTMLInputElement>) => {
         const selectValue = element.target.value;
         setRadioSelectHbe(selectValue);
-        setValue('building', selectValue === 'house' ? '...' : '');
-        setValue('block', selectValue === 'house' ? '...' : '');
-        setValue('livingapartmentroom', selectValue === 'house' ? '...' : '');
-        setValue('enterprise', selectValue !== 'enterprise' ? '...' : '');
-        setValue('cnpj', selectValue !== 'enterprise' ? '...' : '');
     };
     const swapRadioSelectIsBloking = (element: ChangeEvent<HTMLInputElement>) => {
         const selectValue = element.target.value;
@@ -174,6 +169,7 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
                     reset();
                     setAlertMsg(response);
                     goToDonation && setTimeout(() => {
+                        localStorage.setItem('activeMenuLinkSelection', 'RegisterDonation');
                         router.push('registerdonation');
                     }, 1000);
                 } else if (response?.Error === true) {
@@ -199,6 +195,29 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             };
         };
     };
+    useEffect(() => {
+        if (searchDonorCodTel) {
+            console.log(searchDonorCodTel);
+            setValue('donorcode', searchDonorCodTel.donor_id);
+            setValue('name', searchDonorCodTel.name);
+            setValue('telephone', searchDonorCodTel.telephone);
+            setValue('contact1', searchDonorCodTel.contact1);
+            setValue('contact2', searchDonorCodTel.contact2);
+            setValue('zipcode', searchDonorCodTel.zipcode);
+            setValue('street', searchDonorCodTel.street);
+            setValue('district', searchDonorCodTel.district);
+            setValue('city', searchDonorCodTel.city);
+            setValue('numresidence', searchDonorCodTel.numresidence);
+            setValue('typeresidence', searchDonorCodTel.typeresidence);
+            setValue('cnpj', searchDonorCodTel.cnpj);
+            setValue('corporatename', searchDonorCodTel.corporatename);
+            setValue('building', searchDonorCodTel.building);
+            setValue('block', searchDonorCodTel.block);
+            setValue('livingapartmentroom', searchDonorCodTel.livingapartmentroom);
+            setValue('referencepoint', searchDonorCodTel.referencepoint);
+            setRadioSelectHbe(searchDonorCodTel.typeresidence);
+        };
+    }, [searchDonorCodTel, setValue]);
     return (
         <form className='p-1 w-[280px]' onSubmit={handleSubmit(onSubmit)}>
             {title === 'Cadastrar Veículo' && <div className='flex flex-col gap-[5px]'>
@@ -293,8 +312,8 @@ export default function FormFull({ title, value, page, subpage }: FormFullValues
             }
             {value !== 'Donation' && <div className='flex'>
                 {title === 'isblocked' && <input title={radioSelectIsBloking === 'false' ? 'Desbloquear Usuário' : 'Bloquear Usuário'} type='submit' value={radioSelectIsBloking === 'false' ? 'Desbloquear' : 'Bloquear'} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />}
-                <input title={title} type='submit' value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
-                {title === 'Cadastrar Doador' && <input title='Cadastrar e ir para Cadastrar Doação' type='submit' value='Doação' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' onClick={() => setGoToDonation(true)} />}
+                <input type='submit' title={title} value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
+                {title === 'Cadastrar Doador' && <input type='submit' title='Cadastrar e ir para Cadastrar Doação' value='Doação' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' onClick={() => setGoToDonation(true)} />}
                 {page === 'Menu' && <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'>Menu</button>}
             </div>
             }
