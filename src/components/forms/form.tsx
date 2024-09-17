@@ -197,7 +197,6 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
     };
     useEffect(() => {
         if (searchDonorCodTel) {
-            console.log(searchDonorCodTel);
             setValue('donorcode', searchDonorCodTel.donor_id);
             setValue('name', searchDonorCodTel.name);
             setValue('telephone', searchDonorCodTel.telephone);
