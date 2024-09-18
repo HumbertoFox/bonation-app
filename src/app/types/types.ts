@@ -98,3 +98,6 @@ export type CodTelResponse = {
     livingapartmentroom?: string;
     referencepoint?: string;
 }
+export type CodResponse = {
+    coddonation?: string;
+}

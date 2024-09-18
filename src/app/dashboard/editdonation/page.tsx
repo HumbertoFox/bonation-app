@@ -11,7 +11,7 @@ export default function EditDonationPage() {
     return (
         <div className='flex flex-col duration-[400ms]'>
             <FormSearchs search='Código da Doação' searchDonorCodTel={handleCodSearch} />
-            <FormDonations title='Editar Doação' value='Editar' searchDonationCod={searchDonationCod} />
+            <FormDonations title='Editar Doação' value='Editar' searchDonationCod={searchDonationCod} searchDonorResult />
         </div>
     );
 };

@@ -15,7 +15,7 @@ export default function RegisterDonationPage() {
                 <FormSearchs search='Pesquisar Doador' searchDonorCodTel={handleCodTelSearch} />
                 <FormFull title='Editar Doador' value='Donation' page='Dashboard' subpage='registerdonation' searchDonorCodTel={searchDonorCodTel} />
             </div>
-            <FormDonations title='Cadastrar Doação' value='Cadastrar' searchDonationCod searchDonorResult={searchDonorCodTel} />
+            <FormDonations title='Cadastrar Doação' value='Cadastrar' searchDonationCod searchDonorResult />
         </div>
     );
 };
