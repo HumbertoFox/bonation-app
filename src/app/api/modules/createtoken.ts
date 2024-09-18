@@ -11,7 +11,7 @@ export async function createSessionToken(payload = {}) {
             name: 'sessiontoken',
             value: sessiontoken,
             path: '/',
-            domain: 'donation-app-seven.vercel.app',
+            domain: 'donation-app-appdoantions.up.railway.app',
             secure: true,
             httpOnly: true,
             sameSite: 'strict',
