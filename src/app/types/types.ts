@@ -5,11 +5,14 @@ export type FormSearch = {
 export type InputSearch = {
     codtel?: string;
 };
-export type TitleValue = {
+export type TitleValueProps = {
     title: string;
     value: string;
     searchDonationCod: {
         coddonation: string;
+    } | any;
+    searchDonorResult: {
+        donorcode: string;
     } | any;
 }
 export type FormFullValues = {
@@ -73,7 +76,7 @@ export type Inputs = {
     password?: string;
     isblocked?: boolean;
 };
-export type InputsDonations = {
+export type InputsDonationsProps = {
     coddonation?: number;
 }
 export type CodTelResponse = {
@@ -94,7 +97,4 @@ export type CodTelResponse = {
     block?: string;
     livingapartmentroom?: string;
     referencepoint?: string;
-}
-export type CodResponse = {
-    coddonation?: string;
 }
