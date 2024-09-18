@@ -9,9 +9,9 @@ export default function EditDonorPage() {
         SetSearchDonorCodTel(response);
     };
     return (
-        <div>
+        <>
             <FormSearchs search='Pesquisar Doador' searchDonorCodTel={handleCodTelSearch} />
             <FormFull title='Editar Doador' value='Editar' page='Dashboard' subpage='editdonor' searchDonorCodTel={searchDonorCodTel} />
-        </div>
+        </>
     );
 };
