@@ -1,6 +1,6 @@
 'use server';
-import { NextRequest, NextResponse } from "next/server";
-import { isSessionValid } from "./app/api/modules/isvalid";
+import { NextRequest, NextResponse } from 'next/server';
+import { isSessionValid } from '@/app/api/modules/isvalid';
 export const config = { matcher: '/((?!_next/static|_next/image|faction.ico).*)' };
 const publicRoutes = ['/login'];
 export async function middleware(req: NextRequest) {
