@@ -2,12 +2,15 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import ReactLoading from 'react-loading';
+import { GetRemoveCookies } from '../api/actions/remove_cookies';
 export default function LogoutPage() {
     const router = useRouter();
     useEffect(() => {
-        const timer = setTimeout(() => {
-            router.push('/api/actions');
-        }, 3000);
+        const logout = async () => {
+            await GetRemoveCookies();
+            router.push('/login');
+        };
+        const timer = setTimeout(logout, 3000);
         return () => clearTimeout(timer);
     }, [router]);
     return (
