@@ -14,7 +14,7 @@ export type TitleValueProps = {
     searchDonorResult: {
         donorcode: string;
     } | any;
-}
+};
 export type FormFullValues = {
     title: string;
     value: string;
@@ -78,7 +78,7 @@ export type Inputs = {
 };
 export type InputsDonationsProps = {
     coddonation?: number;
-}
+};
 export type CodTelResponse = {
     donorcode?: string;
     name?: string;
@@ -97,7 +97,7 @@ export type CodTelResponse = {
     block?: string;
     livingapartmentroom?: string;
     referencepoint?: string;
-}
+};
 export type CodResponse = {
     coddonation?: string;
-}
+};

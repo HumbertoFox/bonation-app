@@ -51,7 +51,7 @@ export default function SideBar() {
             router.push(routes[activeMenuLinkSelection as keyof typeof routes]);
         } else {
             router.push(routes['Agenda']);
-        }
+        };
     }, [router]);
     return (
         <div className='w-[200px] h-full flex flex-col fixed border-r-[3px] border-[#79D1FF] bg-[#AAF998] duration-[400ms] overflow-hidden max-[1080px]:w-[70px]'>

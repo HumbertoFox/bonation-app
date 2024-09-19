@@ -46,11 +46,12 @@ export default function FormDonations({ title, value, searchDonationCod, searchD
                 </div>
                 <textarea id='obs' placeholder='Observações' className='rounded py-0.5 h-20' />
             </fieldset >
-            {(value === 'Cadastrar' || value === 'Editar') && <div className='flex'>
-                <input type='submit' title={title} value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
-                {title === 'Cadastrar Doação' && <input type='submit' title='Cadastrar Doação e ir para Agendar Coleta' value='Agendar' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />}
-            </div>
-            }
+            {(value === 'Cadastrar' || value === 'Editar') && (
+                <div className='flex'>
+                    <input type='submit' title={title} value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
+                    {title === 'Cadastrar Doação' && (<input type='submit' title='Cadastrar Doação e ir para Agendar Coleta' value='Agendar' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />)}
+                </div>
+            )}
         </form >
     );
 };

@@ -56,7 +56,7 @@ export default function FormSearchs({ search, searchDonorCodTel }: FormSearch) {
                 <input title={search} type='submit' value='Pesquisar' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
             </div>
             }
-            {alertMsg && <AlertMessage {...alertMsg} onClose={handleEventAlertClose} />}
+            {alertMsg && (<AlertMessage {...alertMsg} onClose={handleEventAlertClose} />)}
         </form>
     );
 };
