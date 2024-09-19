@@ -9,7 +9,7 @@ export async function createSessionToken(payload = {}) {
         const { exp } = await openSessionToken(sessiontoken);
         cookies().set('sessiontoken', sessiontoken, {
             path: '/',
-            domain: 'donation-app-appdoantions.up.railway.app',
+            domain: 'railway.app',
             secure: true,
             httpOnly: true,
             sameSite: 'none',
