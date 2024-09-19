@@ -8,8 +8,6 @@ export async function createSessionToken(payload = {}) {
         const sessiontoken = await new jose.SignJWT(payload).setProtectedHeader({ alg: 'HS256' }).setExpirationTime('1d').sign(secret);
         const { exp } = await openSessionToken(sessiontoken);
         cookies().set('sessiontoken', sessiontoken, {
-            name: 'sessiontoken',
-            value: sessiontoken,
             path: '/',
             domain: 'donation-app-appdoantions.up.railway.app',
             secure: true,
