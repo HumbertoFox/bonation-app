@@ -276,21 +276,25 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                                     <input type='radio' id='buildings' value='buildings' className='mr-1.5' {...register('typeresidence')} />
                                     Edifício
                                 </label>
-                                {title.includes('Doador') && (<label htmlFor='enterprise' className='flex items-center cursor-pointer'>
-                                    <input type='radio' id='enterprise' value='enterprise' className='mr-1.5' {...register('typeresidence')} />
-                                    Empresa
-                                </label>
+                                {title.includes('Doador') && (
+                                    <label htmlFor='enterprise' className='flex items-center cursor-pointer'>
+                                        <input type='radio' id='enterprise' value='enterprise' className='mr-1.5' {...register('typeresidence')} />
+                                        Empresa
+                                    </label>
                                 )}
                             </div>
-                            {radioSelectHbe === 'enterprise' && (<input type='text' placeholder={errors.cnpj ? 'Campo Obrigatório' : 'CNPJ'} className={errors.cnpj ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnpj', { required: true })} />)}
-                            {radioSelectHbe !== 'house' && (<div className='flex flex-col gap-[5px]'>
-                                {radioSelectHbe === 'enterprise' && (<input type='text' placeholder={errors.corporatename ? 'Campo Obrigatório' : 'Razão Social'} className={errors.corporatename ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('corporatename', { required: true })} />)}
-                                <input type='text' placeholder={errors.building ? 'Campo Obrigatório' : 'Nome do Edifício'} className={errors.building ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('building', { required: true })} />
-                                <input type='text' placeholder={errors.block ? 'Campo Obrigatório' : 'Bloco'} className={errors.block ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('block', { required: true })} />
-                                <input type='text' placeholder={errors.livingapartmentroom ? 'Campo Obrigatório' : 'Apartamento/Sala'} className={errors.livingapartmentroom ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('livingapartmentroom', { required: true })} />
-                            </div>
+                            {radioSelectHbe === 'enterprise' && (
+                                <input type='text' placeholder={errors.cnpj ? 'Campo Obrigatório' : 'CNPJ'} className={errors.cnpj ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('cnpj', { required: true })} />)}
+                            {radioSelectHbe !== 'house' && (
+                                <div className='flex flex-col gap-[5px]'>
+                                    {radioSelectHbe === 'enterprise' && (<input type='text' placeholder={errors.corporatename ? 'Campo Obrigatório' : 'Razão Social'} className={errors.corporatename ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('corporatename', { required: true })} />)}
+                                    <input type='text' placeholder={errors.building ? 'Campo Obrigatório' : 'Nome do Edifício'} className={errors.building ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('building', { required: true })} />
+                                    <input type='text' placeholder={errors.block ? 'Campo Obrigatório' : 'Bloco'} className={errors.block ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('block', { required: true })} />
+                                    <input type='text' placeholder={errors.livingapartmentroom ? 'Campo Obrigatório' : 'Apartamento/Sala'} className={errors.livingapartmentroom ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'} {...register('livingapartmentroom', { required: true })} />
+                                </div>
                             )}
-                            {page === 'Dashboard' && (<textarea placeholder={errors.referencepoint ? 'Campo Obrigatório' : 'Ponto de Referência'} className={errors.referencepoint ? 'rounded py-0.5 h-20 border-red-600 placeholder-red-600' : 'rounded py-0.5 h-20'} {...register('referencepoint', { required: true })} />)}
+                            {(value === 'Cadastrar' || value === 'Donation' || value === 'Editar') && (
+                                <textarea placeholder={errors.referencepoint ? 'Campo Obrigatório' : 'Ponto de Referência'} className={errors.referencepoint ? 'rounded py-0.5 h-20 border-red-600 placeholder-red-600' : 'rounded py-0.5 h-20'} {...register('referencepoint', { required: true })} />)}
                         </div>
                     )}
                     {(title === 'Entrar' || title === 'Cadastrar Usuário') && (
@@ -332,7 +336,9 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                     <input type='submit' title={title} value={value} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' />
                     {title === 'Cadastrar Doador' && (
                         <input type='submit' title='Cadastrar e ir para Cadastrar Doação' value='Doação' className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3' onClick={() => setGoToDonation(true)} />)}
-                    {page === 'Menu' && (<button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'>Menu</button>)}
+                    {page === 'Menu' && (
+                        <button type='button' title='Voltar ao Menu' onClick={() => router.push('/menu')} className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'>Menu</button>
+                    )}
                 </div>
             )}
             {alertMsg && (<AlertMessage {...alertMsg} page={page} clickDonation={goToDonation} onClose={handleEventAlertClose} />)}
