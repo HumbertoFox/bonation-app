@@ -61,10 +61,10 @@ export async function CreateDonor(formData: FormData) {
         await prisma.donor.create({
             data: { name, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id, cnpj }
         });
-        return { status: 200, Error: false, message: 'Doador Cadastrado com sucesso!' };
+        return { status: 200, Error: false, message: 'Doador Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);
-        return { status: 500, Error: true, message: 'Erro interno do BD!' };
+        return { status: 500, Error: true, message: 'Erro Interno do BD!' };
     } finally {
         await prisma.$disconnect();
     };

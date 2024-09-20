@@ -5,6 +5,7 @@ import { viaCepApi } from '@/app/api/viacep/viacep';
 import { CreateUser } from '@/app/api/actions/create_user';
 import { CreateDonor } from '@/app/api/actions/create_donor';
 import { CreateHelper } from '@/app/api/actions/create_helper';
+import { CreateDriver } from '@/app/api/actions/create_driver';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -155,6 +156,9 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                 case 'Registerhelper':
                     response = await CreateHelper(formData);
                     break;
+                case 'Registerdriver':
+                    response = await CreateDriver(formData);
+                    break;
             };
             if (subpage === 'Login') {
                 if (response?.Error === false) {
@@ -298,7 +302,7 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                             type='number'
                             placeholder={errors.cnh ? 'Campo Obrigatório' : 'CNH'}
                             className={errors.cnh ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
-                            {...register('cnh', { required: true, maxLength: 12, pattern: /\d{12}/g })}
+                            {...register('cnh', { required: true, maxLength: 11, pattern: /\d{11}/g })}
                         />
                     )}
                     {page !== 'Login' && (

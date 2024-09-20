@@ -57,10 +57,10 @@ export async function SearchDonor(formData: FormData) {
             block: donor.donor_address_id.block,
             livingapartmentroom: donor.donor_address_id.livingapartmentroom
         };
-        return { status: 200, Error: false, message: 'Doador encontrado!', detailsDonor };
+        return { status: 200, Error: false, message: 'Doador Encontrado!', detailsDonor };
     } catch (error) {
         console.error(error);
-        return { status: 500, Error: true, message: 'Erro interno do BD!' };
+        return { status: 500, Error: true, message: 'Erro Interno do BD!' };
     } finally {
         await prisma.$disconnect();
     };

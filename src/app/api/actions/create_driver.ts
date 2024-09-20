@@ -1,11 +1,24 @@
 'use server';
 import { PrismaClient } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import { cookies } from 'next/headers';
+import { openSessionToken } from '../modules/opentoken';
 const prisma = new PrismaClient();
-export async function CreateUser(formData: FormData) {
+export async function CreateDriver(formData: FormData) {
+    const sessionTokenCookies = cookies().get('sessiontoken');
+    let userCpf: string | any;
+    if (sessionTokenCookies) {
+        const { value } = sessionTokenCookies;
+        const { cpf } = await openSessionToken(value);
+        userCpf = cpf;
+    };
+    const existingUser = await prisma.user.findFirst({ where: { cpf: userCpf, isblocked: false } });
+    if (!existingUser) {
+        return { status: 401, Error: true, message: 'Usuário não autenticado!' };
+    };
     const name = formData.get('name') as string;
     const dateofbirth = formData.get('dateofbirth') as string;
     const cpf = formData.get('cpf') as string;
+    const cnh = formData.get('cnh') as string;
     const telephone = formData.get('telephone') as string;
     const email = formData.get('email') as string;
     const zipcode = formData.get('zipcode') as string;
@@ -18,12 +31,10 @@ export async function CreateUser(formData: FormData) {
     const block = formData.get('block') as string;
     const livingapartmentroom = formData.get('livingapartmentroom') as string;
     const referencepoint = formData.get('referencepoint') as string;
-    const password = formData.get('password') as string;
-    const hashPassword = await bcrypt.hash(password, 12);
     try {
-        const existingUser = await prisma.user.findFirst({ where: { cpf } });
-        if (existingUser) {
-            return { status: 400, Error: true, message: 'Usuário já cadastrado!' };
+        const existingDriver = await prisma.driver.findFirst({ where: { cnh } });
+        if (existingDriver) {
+            return { status: 400, Error: true, message: 'Motorista já cadastrado!' };
         };
         const exitingCpf = await prisma.cpf.findUnique({ where: { cpf } });
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
@@ -51,10 +62,10 @@ export async function CreateUser(formData: FormData) {
                 data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
             });
         };
-        await prisma.user.create({
-            data: { cpf, telephone, password: hashPassword, address_id: existingAddress.address_id }
+        await prisma.driver.create({
+            data: { cnh, cpf, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id }
         });
-        return { status: 200, Error: false, message: 'Usuário Cadastrado com Sucesso!' };
+        return { status: 200, Error: false, message: 'Motorista Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };

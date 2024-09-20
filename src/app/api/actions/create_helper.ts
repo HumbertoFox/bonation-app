@@ -64,10 +64,10 @@ export async function CreateHelper(formData: FormData) {
         await prisma.helper.create({
             data: { cpf, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id }
         });
-        return { status: 200, Error: false, message: 'Ajudante Cadastrado com sucesso!' };
+        return { status: 200, Error: false, message: 'Ajudante Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);
-        return { status: 500, Error: true, message: 'Erro interno do BD!' };
+        return { status: 500, Error: true, message: 'Erro Interno do BD!' };
     } finally {
         await prisma.$disconnect();
     };
