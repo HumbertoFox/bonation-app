@@ -61,16 +61,31 @@ export default function SideBar() {
             <nav>
                 {Object.keys(routes).map((key) => (
                     <div key={key} className='duration-[400ms]'>
-                        <Link title={linkNames[key as keyof typeof linkNames]} href={routes[key as keyof typeof routes]} className={linkClass(key)} onClick={() => handleMenuLinkClick(key)}>
+                        <Link
+                            title={linkNames[key as keyof typeof linkNames]}
+                            href={routes[key as keyof typeof routes]}
+                            className={linkClass(key)}
+                            onClick={() => handleMenuLinkClick(key)}
+                        >
                             <FontAwesomeIcon icon={icons[key as keyof typeof icons]} className='text-[2rem]' />
-                            <span className='max-[1080px]:hidden'>{linkNames[key as keyof typeof linkNames]}</span>
+                            <span
+                                className='max-[1080px]:hidden'>
+                                {linkNames[key as keyof typeof linkNames]}
+                            </span>
                         </Link>
                     </div>
                 ))}
                 <div className=' duration-[400ms] mt-4'>
-                    <Link title='Sair/Logout' href={'/logout'} className='flex items-center p-2.5 gap-[15px] duration-[400ms] hover:text-[white] active:bg-[#79D1FF]'>
+                    <Link
+                        title='Sair/Logout'
+                        href={'/logout'}
+                        className='flex items-center p-2.5 gap-[15px] duration-[400ms] hover:text-[white] active:bg-[#79D1FF]'
+                    >
                         <FontAwesomeIcon icon={faRightFromBracket} className='text-[2rem] rotate-180' />
-                        <span className='max-[1080px]:hidden'>Sair do Sistema</span>
+                        <span
+                            className='max-[1080px]:hidden'>
+                            Sair do Sistema
+                        </span>
                     </Link>
                 </div>
             </nav>
