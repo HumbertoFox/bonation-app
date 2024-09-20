@@ -4,6 +4,7 @@ import { LoginAuth } from '@/app/api/actions/auth_action';
 import { viaCepApi } from '@/app/api/viacep/viacep';
 import { CreateUser } from '@/app/api/actions/create_user';
 import { CreateDonor } from '@/app/api/actions/create_donor';
+import { CreateHelper } from '@/app/api/actions/create_helper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -151,6 +152,9 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                 case 'Registerdonor':
                     response = await CreateDonor(formData);
                     break;
+                case 'Registerhelper':
+                    response = await CreateHelper(formData);
+                    break;
             };
             if (subpage === 'Login') {
                 if (response?.Error === false) {
@@ -289,6 +293,14 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                             {...register('cpf', { required: true, maxLength: 11, pattern: /\d{11}/g })}
                         />
                     )}
+                    {title === 'Cadastrar Motorista' && (
+                        <input
+                            type='number'
+                            placeholder={errors.cnh ? 'Campo Obrigatório' : 'CNH'}
+                            className={errors.cnh ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
+                            {...register('cnh', { required: true, maxLength: 12, pattern: /\d{12}/g })}
+                        />
+                    )}
                     {page !== 'Login' && (
                         <input
                             type='tel'
@@ -317,14 +329,6 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                             placeholder={errors.email ? 'Campo Obrigatório' : 'Email'}
                             className={errors.email ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
                             {...register('email', { required: true })}
-                        />
-                    )}
-                    {title === 'Cadastrar Motorista' && (
-                        <input
-                            type='number'
-                            placeholder={errors.cnh ? 'Campo Obrigatório' : 'CNH'}
-                            className={errors.cnh ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
-                            {...register('cnh', { required: true, maxLength: 12, pattern: /\d{12}/g })}
                         />
                     )}
                     {title !== 'Entrar' && (

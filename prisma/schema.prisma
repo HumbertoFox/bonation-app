@@ -8,21 +8,55 @@ datasource db {
 }
 
 model User {
-  user_id        Int        @id @default(autoincrement())
-  cpf            String
-  telephone      String
-  password       String     @db.VarChar(200)
-  address_id     Int
-  isblocked      Boolean    @default(false)
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt()
-  user_address   Address    @relation(fields: [address_id], references: [address_id])
-  user_cpf       Cpf        @relation(fields: [cpf], references: [cpf])
-  user_telephone Telephone  @relation(fields: [telephone], references: [telephone])
-  user_donation  Donation[]
-  user_donor     Donor[]
+  user_id         Int        @id @default(autoincrement())
+  cpf             String
+  telephone       String
+  password        String     @db.VarChar(200)
+  address_id      Int
+  isblocked       Boolean    @default(false)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt()
+  user_cpf        Cpf        @relation(fields: [cpf], references: [cpf])
+  user_telephone  Telephone  @relation(fields: [telephone], references: [telephone])
+  user_address_id Address    @relation(fields: [address_id], references: [address_id])
+  user_donation   Donation[]
+  user_donor      Donor[]
+  user_helper     Helper[]
+  user_driver     Driver[]
 
-  @@map("users")
+  @@map("Users")
+}
+
+model Helper {
+  helper_id         Int       @unique @default(autoincrement())
+  cpf               String
+  telephone         String
+  address_id        Int
+  user_id           Int
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt()
+  helper_cpf        Cpf       @relation(fields: [cpf], references: [cpf])
+  helper_telephone  Telephone @relation(fields: [telephone], references: [telephone])
+  helper_address_id Address   @relation(fields: [address_id], references: [address_id])
+  helper_user_id    User      @relation(fields: [user_id], references: [user_id])
+
+  @@map("Helpers")
+}
+
+model Driver {
+  cnh               String    @id @db.VarChar(11)
+  cpf               String
+  telephone         String
+  address_id        Int
+  user_id           Int
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt()
+  driver_cpf        Cpf       @relation(fields: [cpf], references: [cpf])
+  driver_telephone  Telephone @relation(fields: [telephone], references: [telephone])
+  driver_address_id Address   @relation(fields: [address_id], references: [address_id])
+  driver_user_id    User      @relation(fields: [user_id], references: [user_id])
+
+  @@map("Drivers")
 }
 
 model Cpf {
@@ -32,19 +66,23 @@ model Cpf {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt()
   cpf_user    User[]
+  cpf_helper  Helper[]
+  cpf_driver  Driver[]
 
-  @@map("cpfs")
+  @@map("Cpfs")
 }
 
 model Telephone {
-  telephone       String  @id @db.VarChar(11)
-  contact1        String?
-  contact2        String?
-  email           String?
-  telephone_user  User[]
-  telephone_donor Donor[]
+  telephone        String   @id @db.VarChar(11)
+  contact1         String?
+  contact2         String?
+  email            String?
+  telephone_user   User[]
+  telephone_donor  Donor[]
+  telephone_helper Helper[]
+  telephone_driver Driver[]
 
-  @@map("telephones")
+  @@map("Telephones")
 }
 
 model Zipcode {
@@ -54,14 +92,14 @@ model Zipcode {
   city            String    @db.VarChar(100)
   zipcode_address Address[]
 
-  @@map("zipcodes")
+  @@map("Zipcodes")
 }
 
 model Address {
   address_id          Int        @id @default(autoincrement())
   zipcode             String
   numresidence        String     @db.VarChar(50)
-  referencepoint      String?
+  referencepoint      String
   typeresidence       String
   building            String?    @db.VarChar(100)
   block               String?    @db.VarChar(50)
@@ -72,8 +110,10 @@ model Address {
   address_user        User[]
   address_donation    Donation[]
   address_donor       Donor[]
+  address_helper      Helper[]
+  address_driver      Driver[]
 
-  @@map("addresss")
+  @@map("Addresss")
 }
 
 model Donor {
@@ -108,14 +148,6 @@ model Donation {
   @@map("Donations")
 }
 
-model Object {
-  object_id Int    @unique @default(autoincrement())
-  object    String
-  amount    String
-
-  @@map("Objects")
-}
-
 model Enterprise {
   cnpj             String   @id @db.VarChar(20)
   corporatename    String
@@ -124,4 +156,12 @@ model Enterprise {
   enterprise_donor Donor[]
 
   @@map("Enterprises")
+}
+
+model Object {
+  object_id Int    @unique @default(autoincrement())
+  object    String
+  amount    String
+
+  @@map("Objects")
 }
