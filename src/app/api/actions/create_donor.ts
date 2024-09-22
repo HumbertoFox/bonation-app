@@ -38,9 +38,7 @@ export async function CreateDonor(formData: FormData) {
         };
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
         const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
-        let existingAddress = await prisma.address.findFirst({
-            where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
-        });
+        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (!existingTelephone) {
             await prisma.telephone.create({ data: { telephone, contact1, contact2 } });
         };
@@ -54,13 +52,9 @@ export async function CreateDonor(formData: FormData) {
             };
         };
         if (!existingAddress) {
-            existingAddress = await prisma.address.create({
-                data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
-            });
+            existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
-        await prisma.donor.create({
-            data: { name, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id, cnpj }
-        });
+        await prisma.donor.create({ data: { name, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id, cnpj } });
         return { status: 200, Error: false, message: 'Doador Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);

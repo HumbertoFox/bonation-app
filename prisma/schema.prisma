@@ -23,6 +23,7 @@ model User {
   user_donor      Donor[]
   user_helper     Helper[]
   user_driver     Driver[]
+  user_vehicle    Vehicle[]
 
   @@map("Users")
 }
@@ -41,6 +42,20 @@ model Helper {
   helper_user_id    User      @relation(fields: [user_id], references: [user_id])
 
   @@map("Helpers")
+}
+
+model Vehicle {
+  vehicle_id      Int      @unique @default(autoincrement())
+  model           String
+  chassi          String   @unique
+  plate           String   @unique
+  km              String
+  user_id         Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt()
+  vehicle_user_id User     @relation(fields: [user_id], references: [user_id])
+
+  @@map("Vehicles")
 }
 
 model Driver {

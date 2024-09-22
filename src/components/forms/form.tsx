@@ -6,6 +6,7 @@ import { CreateUser } from '@/app/api/actions/create_user';
 import { CreateDonor } from '@/app/api/actions/create_donor';
 import { CreateHelper } from '@/app/api/actions/create_helper';
 import { CreateDriver } from '@/app/api/actions/create_driver';
+import { CreateVehicle } from '@/app/api/actions/create_vehicle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -159,6 +160,9 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                 case 'Registerdriver':
                     response = await CreateDriver(formData);
                     break;
+                case 'Registervehicle':
+                    response = await CreateVehicle(formData);
+                    break;
             };
             if (subpage === 'Login') {
                 if (response?.Error === false) {
@@ -231,12 +235,13 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                 <div className='flex flex-col gap-[5px]'>
                     <input
                         type='text'
-                        placeholder={errors.modelo ? 'Campo Obrigatório' : 'Modelo'}
-                        className={errors.modelo ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
-                        {...register('modelo', { required: true })}
+                        placeholder={errors.model ? 'Campo Obrigatório' : 'Modelo'}
+                        className={errors.model ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
+                        {...register('model', { required: true })}
                     />
                     <input
-                        type='text' placeholder={errors.chassi ? 'Campo Obrigatório' : 'Chassi'}
+                        type='text'
+                        placeholder={errors.chassi ? 'Campo Obrigatório' : 'Chassi'}
                         className={errors.chassi ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
                         {...register('chassi', { required: true })}
                     />
@@ -323,7 +328,8 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                             />
                             <input
                                 type='tel'
-                                placeholder='Contato/Opcional ou Ramal' className='rounded py-0.5' {...register('contact2')}
+                                placeholder='Contato/Opcional ou Ramal'
+                                className='rounded py-0.5' {...register('contact2')}
                             />
                         </div>
                     )}
@@ -492,11 +498,24 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
             {title === 'isblocked' && (
                 <div className='flex gap-5 justify-center p-1 pt-3.5'>
                     <label htmlFor='isblocked' className='flex items-center cursor-pointer'>
-                        <input type='radio' id='isblocked' value='true' className='mr-1.5' {...register('isblocked', { onChange: swapRadioSelectIsBloking })} />
+                        <input
+                            type='radio'
+                            id='isblocked'
+                            value='true'
+                            className='mr-1.5'
+                            {...register('isblocked', { onChange: swapRadioSelectIsBloking })}
+                        />
                         Bloquear
                     </label>
                     <label htmlFor='isunblocked' className='flex items-center cursor-pointer'>
-                        <input type='radio' id='isunblocked' value='false' className='mr-1.5' defaultChecked {...register('isblocked')} />
+                        <input
+                            type='radio'
+                            id='isunblocked'
+                            value='false'
+                            className='mr-1.5'
+                            defaultChecked
+                            {...register('isblocked')}
+                        />
                         Desbloquear
                     </label>
                 </div>

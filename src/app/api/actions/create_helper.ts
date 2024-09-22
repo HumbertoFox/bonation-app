@@ -38,32 +38,20 @@ export async function CreateHelper(formData: FormData) {
         const exitingCpf = await prisma.cpf.findUnique({ where: { cpf } });
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
         const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
-        let existingAddress = await prisma.address.findFirst({
-            where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom }
-        });
+        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (!exitingCpf) {
-            await prisma.cpf.create({
-                data: { cpf, name, dateofbirth }
-            });
+            await prisma.cpf.create({ data: { cpf, name, dateofbirth } });
         };
         if (!existingTelephone) {
-            await prisma.telephone.create({
-                data: { telephone, email }
-            });
+            await prisma.telephone.create({ data: { telephone, email } });
         };
         if (!existingZipcode) {
-            await prisma.zipcode.create({
-                data: { zipcode, street, district, city }
-            });
+            await prisma.zipcode.create({ data: { zipcode, street, district, city } });
         };
         if (!existingAddress) {
-            existingAddress = await prisma.address.create({
-                data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
-            });
+            existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
-        await prisma.helper.create({
-            data: { cpf, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id }
-        });
+        await prisma.helper.create({ data: { cpf, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id } });
         return { status: 200, Error: false, message: 'Ajudante Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);

@@ -48,7 +48,7 @@ export type AlertMessageState = {
     onClose?: () => void;
 };
 export type Inputs = {
-    modelo?: string;
+    model?: string;
     chassi?: string;
     plate?: string;
     km?: number;
