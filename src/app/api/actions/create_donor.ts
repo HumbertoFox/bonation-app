@@ -55,7 +55,7 @@ export async function CreateDonor(formData: FormData) {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
         await prisma.donor.create({ data: { name, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id, cnpj } });
-        return { status: 200, Error: false, message: 'Doador Cadastrado com Sucesso!' };
+        return { status: 201, Error: false, message: 'Doador Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };

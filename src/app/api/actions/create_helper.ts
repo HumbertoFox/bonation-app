@@ -52,7 +52,7 @@ export async function CreateHelper(formData: FormData) {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
         await prisma.helper.create({ data: { cpf, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id } });
-        return { status: 200, Error: false, message: 'Ajudante Cadastrado com Sucesso!' };
+        return { status: 201, Error: false, message: 'Ajudante Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };

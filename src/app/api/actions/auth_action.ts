@@ -23,7 +23,7 @@ export async function LoginAuth(formData: FormData) {
         };
         const user_telephone = await prisma.telephone.findFirst({ where: { telephone: user.telephone } });
         await createSessionToken({ sub: user.user_id, cpf: user.cpf, email: user_telephone?.email });
-        return { status: 200, Error: false, message: 'Login Realizado com Sucesso!' };
+        return { status: 202, Error: false, message: 'Login Realizado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };

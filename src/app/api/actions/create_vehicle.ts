@@ -25,7 +25,7 @@ export async function CreateVehicle(formData: FormData) {
             return { status: 400, Error: true, message: 'Veículo já cadastrado!' };
         };
         await prisma.vehicle.create({ data: { model, chassi, plate, km, user_id: existingUser.user_id } });
-        return { status: 200, Error: false, message: 'Veículo Cadastrado com Sucesso!' };
+        return { status: 201, Error: false, message: 'Veículo Cadastrado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };

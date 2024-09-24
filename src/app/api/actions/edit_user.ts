@@ -22,27 +22,50 @@ export async function CreateUser(formData: FormData) {
     const hashPassword = await bcrypt.hash(password, 12);
     try {
         const existingUser = await prisma.user.findFirst({ where: { cpf } });
-        if (existingUser) {
-            return { status: 400, Error: true, message: 'Usuário já cadastrado!' };
+        if (!existingUser) {
+            return { status: 400, Error: true, message: 'Usuário Não cadastrado!' };
         };
         const exitingCpf = await prisma.cpf.findUnique({ where: { cpf } });
-        const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
-        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
-        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
-        if (!exitingCpf) {
-            await prisma.cpf.create({ data: { cpf, name, dateofbirth } });
+        if (exitingCpf) {
+            await prisma.cpf.update({
+                where: { cpf },
+                data: { name, dateofbirth }
+            });
+        } else {
+            return { status: 400, Error: true, message: 'CPF Não cadastrado!' };
         };
-        if (!existingTelephone) {
+        const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
+        if (existingTelephone) {
+            await prisma.telephone.update({
+                where: { telephone },
+                data: { telephone, email }
+            });
+        } else {
             await prisma.telephone.create({ data: { telephone, email } });
         };
-        if (!existingZipcode) {
+        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
+        if (existingZipcode) {
+            await prisma.zipcode.update({
+                where: { zipcode },
+                data: { zipcode, street, district, city }
+            });
+        } else {
             await prisma.zipcode.create({ data: { zipcode, street, district, city } });
         };
-        if (!existingAddress) {
+        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
+        if (existingAddress) {
+            existingAddress = await prisma.address.update({
+                where: { address_id: existingAddress.address_id },
+                data: { address_id: existingAddress.address_id, zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
+            });
+        } else {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
-        await prisma.user.create({ data: { cpf, telephone, password: hashPassword, address_id: existingAddress.address_id } });
-        return { status: 201, Error: false, message: 'Usuário Cadastrado com Sucesso!' };
+        await prisma.user.update({
+            where: { user_id: existingUser.user_id },
+            data: { cpf, telephone, password: hashPassword, address_id: existingAddress.address_id }
+        });
+        return { status: 201, Error: false, message: 'Usuário Editado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };
