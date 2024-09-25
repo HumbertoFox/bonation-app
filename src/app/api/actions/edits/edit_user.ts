@@ -38,7 +38,7 @@ export async function CreateUser(formData: FormData) {
         if (existingTelephone) {
             await prisma.telephone.update({
                 where: { telephone },
-                data: { telephone, email }
+                data: { email }
             });
         } else {
             await prisma.telephone.create({ data: { telephone, email } });
@@ -47,7 +47,7 @@ export async function CreateUser(formData: FormData) {
         if (existingZipcode) {
             await prisma.zipcode.update({
                 where: { zipcode },
-                data: { zipcode, street, district, city }
+                data: { street, district, city }
             });
         } else {
             await prisma.zipcode.create({ data: { zipcode, street, district, city } });
@@ -56,7 +56,7 @@ export async function CreateUser(formData: FormData) {
         if (existingAddress) {
             existingAddress = await prisma.address.update({
                 where: { address_id: existingAddress.address_id },
-                data: { address_id: existingAddress.address_id, zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
+                data: { address_id: existingAddress.address_id, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint }
             });
         } else {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });

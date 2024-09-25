@@ -37,11 +37,10 @@ export async function CreateDonor(formData: FormData) {
             return { status: 400, Error: true, message: 'Doador já cadastrado!' };
         };
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
-        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
-        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (!existingTelephone) {
             await prisma.telephone.create({ data: { telephone, contact1, contact2 } });
         };
+        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
         if (!existingZipcode) {
             await prisma.zipcode.create({ data: { zipcode, street, district, city } });
         };
@@ -51,6 +50,7 @@ export async function CreateDonor(formData: FormData) {
                 await prisma.enterprise.create({ data: { cnpj, corporatename } });
             };
         };
+        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (!existingAddress) {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };

@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   user_id         Int        @id @default(autoincrement())
-  cpf             String
+  cpf             String     @unique
   telephone       String
   password        String     @db.VarChar(200)
   address_id      Int
@@ -29,8 +29,8 @@ model User {
 }
 
 model Helper {
-  helper_id         Int       @unique @default(autoincrement())
-  cpf               String
+  helper_id         Int       @id @default(autoincrement())
+  cpf               String    @unique
   telephone         String
   address_id        Int
   user_id           Int
@@ -45,7 +45,7 @@ model Helper {
 }
 
 model Vehicle {
-  vehicle_id      Int      @unique @default(autoincrement())
+  vehicle_id      Int      @id @default(autoincrement())
   model           String
   chassi          String   @unique
   plate           String   @unique
@@ -60,7 +60,7 @@ model Vehicle {
 
 model Driver {
   cnh               String    @id @db.VarChar(11)
-  cpf               String
+  cpf               String    @unique
   telephone         String
   address_id        Int
   user_id           Int
@@ -132,9 +132,9 @@ model Address {
 }
 
 model Donor {
-  donor_id         Int         @unique @default(autoincrement())
+  donor_id         Int         @id @default(autoincrement())
   name             String
-  telephone        String
+  telephone        String      @unique
   address_id       Int
   user_id          Int
   cnpj             String?
@@ -150,7 +150,7 @@ model Donor {
 }
 
 model Donation {
-  donation_id         Int      @unique @default(autoincrement())
+  donation_id         Int      @id @default(autoincrement())
   address_id          Int
   donor_id            Int
   user_id             Int

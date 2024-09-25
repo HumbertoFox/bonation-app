@@ -26,18 +26,18 @@ export async function CreateUser(formData: FormData) {
             return { status: 400, Error: true, message: 'Usuário já cadastrado!' };
         };
         const exitingCpf = await prisma.cpf.findUnique({ where: { cpf } });
-        const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
-        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
-        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (!exitingCpf) {
             await prisma.cpf.create({ data: { cpf, name, dateofbirth } });
         };
+        const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
         if (!existingTelephone) {
             await prisma.telephone.create({ data: { telephone, email } });
         };
+        const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
         if (!existingZipcode) {
             await prisma.zipcode.create({ data: { zipcode, street, district, city } });
         };
+        let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (!existingAddress) {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
