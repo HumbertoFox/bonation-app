@@ -1,6 +1,9 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { SearchUser } from '@/app/api/actions/search_user';
 import { SearchDonor } from '@/app/api/actions/search_donor';
+import { SearchDriver } from '@/app/api/actions/search_driver';
+import { SearchHelper } from '@/app/api/actions/search_helper';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AlertMessageState, FormSearch, InputSearch } from '@/app/types/types';
 import AlertMessage from '../alert/alert';
@@ -19,6 +22,15 @@ export default function FormSearchs({ search, searchDonorCodTel }: FormSearch) {
             switch (search) {
                 case 'Pesquisar Doador':
                     response = await SearchDonor(formData);
+                    break;
+                case 'Pesquisar Usuário':
+                    response = await SearchUser(formData);
+                    break;
+                case 'Pesquisar Motorista':
+                    response = await SearchDriver(formData);
+                    break;
+                case 'Pesquisar Ajudante':
+                    response = await SearchHelper(formData);
                     break;
             };
             if (response?.Error === false) {
@@ -75,6 +87,57 @@ export default function FormSearchs({ search, searchDonorCodTel }: FormSearch) {
                         value='Pesquisar'
                         className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'
                     />
+                </div>
+            )}
+            {search === 'Pesquisar Usuário' && (
+                <div className='flex flex-col'>
+                    <input
+                        type='search'
+                        placeholder={errors.cpf ? 'Campo Obrigatório' : 'CPF'}
+                        className={errors.cpf ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
+                        {...register('cpf', { required: true, maxLength: 11, pattern: /\d/g })}
+                    />
+                    <div className='flex'>
+                        <input title={search}
+                            type='submit'
+                            value='Pesquisar'
+                            className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'
+                        />
+                    </div>
+                </div>
+            )}
+            {search === 'Pesquisar Motorista' && (
+                <div className='flex flex-col'>
+                    <input
+                        type='search'
+                        placeholder={errors.cnh ? 'Campo Obrigatório' : 'CNH'}
+                        className={errors.cnh ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
+                        {...register('cnh', { required: true, maxLength: 11, pattern: /\d/g })}
+                    />
+                    <div className='flex'>
+                        <input title={search}
+                            type='submit'
+                            value='Pesquisar'
+                            className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'
+                        />
+                    </div>
+                </div>
+            )}
+            {search === 'Pesquisar Ajudante' && (
+                <div className='flex flex-col'>
+                    <input
+                        type='search'
+                        placeholder={errors.cpf ? 'Campo Obrigatório' : 'CPF'}
+                        className={errors.cpf ? 'rounded py-0.5 border-red-600 placeholder-red-600' : 'rounded py-0.5'}
+                        {...register('cpf', { required: true, maxLength: 11, pattern: /\d/g })}
+                    />
+                    <div className='flex'>
+                        <input title={search}
+                            type='submit'
+                            value='Pesquisar'
+                            className='bg-blue-600 text-white font-bold py-1 px-2 duration-[400ms] cursor-pointer mx-auto rounded drop-shadow-[1px_1px_0.5px_#AAF998] hover:bg-green-600 hover:drop-shadow-[1px_1px_0.5px_#79D1FF] active:bg-blue-600 active:text-black mt-3'
+                        />
+                    </div>
                 </div>
             )}
             {alertMsg && (

@@ -1,5 +1,4 @@
 import SideBar from '@/components/sidebar';
-
 export default function DashboardLayout({
   children,
 }: Readonly<{

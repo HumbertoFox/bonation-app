@@ -26,7 +26,7 @@ export async function SearchDonor(formData: FormData) {
                 where: { telephone: codtel },
                 include: includeData
             });
-        }
+        };
         if (!donor && codtel.length <= 9) {
             donor = await prisma.donor.findFirst({
                 where: {

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { openSessionToken } from '@/app/api/modules/opentoken';
 const prisma = new PrismaClient();
-export async function CreateHelper(formData: FormData) {
+export async function EditHelper(formData: FormData) {
     const sessionTokenCookies = cookies().get('sessiontoken');
     let userCpf: string | any;
     if (sessionTokenCookies) {
@@ -14,6 +14,17 @@ export async function CreateHelper(formData: FormData) {
     const existingUser = await prisma.user.findFirst({ where: { cpf: userCpf, isblocked: false } });
     if (!existingUser) {
         return { status: 401, Error: true, message: 'Usuário não autenticado!' };
+    };
+    const fields = [
+        'name', 'dateofbirth', 'telephone', 'email',
+        'zipcode', 'typeresidence', 'street', 'district',
+        'city', 'numresidence', 'referencepoint'
+    ];
+    for (const field of fields) {
+        const value = formData.get(field);
+        if (!value || value.toString().trim() === '') {
+            return { status: 400, Error: true, message: `${field} não pode ser vazio!` };
+        };
     };
     const name = formData.get('name') as string;
     const dateofbirth = formData.get('dateofbirth') as string;

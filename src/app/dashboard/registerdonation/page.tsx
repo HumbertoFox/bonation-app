@@ -5,9 +5,9 @@ import FormFull from '@/components/forms/form';
 import FormDonations from '@/components/forms/formdonat';
 import FormSearchs from '@/components/forms/formsearch';
 export default function RegisterDonationPage() {
-    const [searchDonorCodTel, SetSearchDonorCodTel] = useState<CodTelResponse | null>(null);
+    const [searchDonorCodTel, setSearchDonorCodTel] = useState<CodTelResponse | null>(null);
     const handleCodTelSearch = (response: CodTelResponse) => {
-        SetSearchDonorCodTel(response);
+        setSearchDonorCodTel(response);
     };
     return (
         <div className='flex duration-[400ms] max-md:flex-col'>

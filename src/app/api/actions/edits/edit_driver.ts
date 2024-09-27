@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { openSessionToken } from '@/app/api/modules/opentoken';
 const prisma = new PrismaClient();
-export async function CreateDonor(formData: FormData) {
+export async function EditDriver(formData: FormData) {
     const sessionTokenCookies = cookies().get('sessiontoken');
     let userCpf: string | any;
     if (sessionTokenCookies) {
@@ -15,12 +15,23 @@ export async function CreateDonor(formData: FormData) {
     if (!existingUser) {
         return { status: 401, Error: true, message: 'Usuário não autenticado!' };
     };
+    const fields = [
+        'name', 'dateofbirth', 'telephone',
+        'zipcode', 'typeresidence', 'street', 'district',
+        'city', 'numresidence', 'referencepoint'
+    ];
+    for (const field of fields) {
+        const value = formData.get(field);
+        if (!value || value.toString().trim() === '') {
+            return { status: 400, Error: true, message: `${field} não pode ser vazio!` };
+        };
+    };
     const name = formData.get('name') as string;
+    const dateofbirth = formData.get('dateofbirth') as string;
+    const cpf = formData.get('cpf') as string;
+    const cnh = formData.get('cnh') as string;
     const telephone = formData.get('telephone') as string;
-    const contact1 = formData.get('contact1') as string;
-    const contact2 = formData.get('contact2') as string;
-    const cnpj = formData.get('cnpj') as string;
-    const corporatename = formData.get('corporatename') as string;
+    const email = formData.get('email') as string;
     const zipcode = formData.get('zipcode') as string;
     const typeresidence = formData.get('typeresidence') as string;
     const street = formData.get('street') as string;
@@ -32,36 +43,36 @@ export async function CreateDonor(formData: FormData) {
     const livingapartmentroom = formData.get('livingapartmentroom') as string;
     const referencepoint = formData.get('referencepoint') as string;
     try {
-        const existingDonor = await prisma.donor.findFirst({ where: { telephone } });
-        if (!existingDonor) {
-            return { status: 400, Error: true, message: 'Doador não cadastrado!' };
+        const existingDriver = await prisma.driver.findFirst({ where: { cnh } });
+        if (!existingDriver) {
+            return { status: 400, Error: true, message: 'Motorista não cadastrado!' };
+        };
+        const exitingCpf = await prisma.cpf.findUnique({ where: { cpf } });
+        if (exitingCpf) {
+            await prisma.cpf.update({
+                where: { cpf },
+                data: { name, dateofbirth }
+            });
+        } else {
+            return { status: 400, Error: true, message: 'CPF Não cadastrado!' };
         };
         const existingTelephone = await prisma.telephone.findUnique({ where: { telephone } });
         if (existingTelephone) {
             await prisma.telephone.update({
                 where: { telephone },
-                data: { telephone, contact1, contact2 }
+                data: { email }
             });
         } else {
-            await prisma.telephone.create({ data: { telephone, contact1, contact2 } });
+            await prisma.telephone.create({ data: { telephone, email } });
         };
         const existingZipcode = await prisma.zipcode.findUnique({ where: { zipcode } });
         if (existingZipcode) {
             await prisma.zipcode.update({
                 where: { zipcode },
-                data: { zipcode, street, district, city }
+                data: { street, district, city }
             });
         } else {
             await prisma.zipcode.create({ data: { zipcode, street, district, city } });
-        };
-        if (cnpj) {
-            const existingEnterprise = await prisma.enterprise.findUnique({ where: { cnpj } });
-            if (existingEnterprise && cnpj !== '') {
-                await prisma.enterprise.update({
-                    where: { cnpj },
-                    data: { cnpj, corporatename }
-                });
-            };
         };
         let existingAddress = await prisma.address.findFirst({ where: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom } });
         if (existingAddress) {
@@ -72,11 +83,11 @@ export async function CreateDonor(formData: FormData) {
         } else {
             existingAddress = await prisma.address.create({ data: { zipcode, numresidence, typeresidence, building, block, livingapartmentroom, referencepoint } });
         };
-        await prisma.donor.update({
-            where: { donor_id: existingDonor.donor_id },
-            data: { name, telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id, cnpj }
+        await prisma.driver.update({
+            where: { cnh },
+            data: { telephone, address_id: existingAddress.address_id, user_id: existingUser.user_id }
         });
-        return { status: 201, Error: false, message: 'Doador Editado com Sucesso!' };
+        return { status: 201, Error: false, message: 'Motorista Editado com Sucesso!' };
     } catch (error) {
         console.error(error);
         return { status: 500, Error: true, message: 'Erro Interno do BD!' };

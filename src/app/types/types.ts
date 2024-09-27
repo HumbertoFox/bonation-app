@@ -98,6 +98,28 @@ export type CodTelResponse = {
     livingapartmentroom?: string;
     referencepoint?: string;
 };
+export type UserResponse = HelperResponse & {
+    password?: string;
+};
+export type DriverResponse = HelperResponse & {
+    cnh?: string;
+};
+export type HelperResponse = {
+    cpf?: string;
+    name?: string;
+    telephone?: string;
+    zipcode?: string;
+    typeresidence?: string;
+    nunresidence?: string;
+    street?: string;
+    district?: string;
+    city?: string;
+    residence?: string;
+    building?: string;
+    block?: string;
+    livingapartmentroom?: string;
+    referencepoint?: string;
+};
 export type CodResponse = {
     coddonation?: string;
 };

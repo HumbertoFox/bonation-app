@@ -15,6 +15,15 @@ export async function CreateVehicle(formData: FormData) {
     if (!existingUser) {
         return { status: 401, Error: true, message: 'Usuário não autenticado!' };
     };
+    const fields = [
+        'model', 'chassi', 'plate', 'km'
+    ];
+    for (const field of fields) {
+        const value = formData.get(field);
+        if (!value || value.toString().trim() === '') {
+            return { status: 400, Error: true, message: `${field} não pode ser vazio!` };
+        };
+    };
     const model = formData.get('model') as string;
     const chassi = formData.get('chassi') as string;
     const plate = formData.get('plate') as string;

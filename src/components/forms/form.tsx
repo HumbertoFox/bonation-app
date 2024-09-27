@@ -210,10 +210,14 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
     useEffect(() => {
         if (searchDonorCodTel) {
             setValue('donorcode', searchDonorCodTel.donor_id);
+            setValue('cnh', searchDonorCodTel.cnh);
+            setValue('cpf', searchDonorCodTel.cpf);
             setValue('name', searchDonorCodTel.name);
+            setValue('dateofbirth', searchDonorCodTel.dateofbirth);
             setValue('telephone', searchDonorCodTel.telephone);
             setValue('contact1', searchDonorCodTel.contact1);
             setValue('contact2', searchDonorCodTel.contact2);
+            setValue('email', searchDonorCodTel.email);
             setValue('zipcode', searchDonorCodTel.zipcode);
             setValue('street', searchDonorCodTel.street);
             setValue('district', searchDonorCodTel.district);
@@ -280,7 +284,7 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                         />
                     )}
                     {page === 'Menu' && (
-                        <div className='flex gap-1'>
+                        <div className='flex gap-1 text-gray-500'>
                             <label htmlFor='dateofbirth'>Data de Nascimento
                                 <input
                                     type='date'
@@ -288,7 +292,7 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                                     {...register('dateofbirth', { required: true, onChange: handleDateChange })}
                                 />
                             </label>
-                            <div className='flex flex-col justify-end items-center'>
+                            <div className='flex flex-col justify-end items-center text-gray-500'>
                                 <p>{age}</p>
                                 <p>anos</p>
                             </div>
@@ -374,7 +378,7 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                                 {...register('numresidence', { required: true })}
                             />
                             <div className='flex gap-5 justify-center p-1'>
-                                <label htmlFor='house' className='flex items-center cursor-pointer'>
+                                <label htmlFor='house' className='flex items-center text-gray-500 cursor-pointer'>
                                     <input
                                         type='radio'
                                         id='house'
@@ -385,7 +389,7 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                                     />
                                     Casa
                                 </label>
-                                <label htmlFor='buildings' className='flex items-center cursor-pointer'>
+                                <label htmlFor='buildings' className='flex items-center text-gray-500 cursor-pointer'>
                                     <input
                                         type='radio'
                                         id='buildings'
@@ -396,7 +400,7 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                                     Edifício
                                 </label>
                                 {title.includes('Doador') && (
-                                    <label htmlFor='enterprise' className='flex items-center cursor-pointer'>
+                                    <label htmlFor='enterprise' className='flex items-center text-gray-500 cursor-pointer'>
                                         <input
                                             type='radio'
                                             id='enterprise'

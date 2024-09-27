@@ -3,6 +3,18 @@ import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 export async function CreateUser(formData: FormData) {
+    const fields = [
+        'name', 'telephone', 'zipcode', 'typeresidence',
+        'street', 'district', 'city', 'numresidence',
+        'building', 'block', 'livingapartmentroom',
+        'referencepoint', 'password'
+    ];
+    for (const field of fields) {
+        const value = formData.get(field);
+        if (!value || value.toString().trim() === '') {
+            return { status: 400, Error: true, message: `${field} não pode ser vazio!` };
+        };
+    };
     const name = formData.get('name') as string;
     const dateofbirth = formData.get('dateofbirth') as string;
     const cpf = formData.get('cpf') as string;
