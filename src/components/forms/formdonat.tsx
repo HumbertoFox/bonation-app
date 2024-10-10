@@ -1,7 +1,7 @@
 'use client';
-import { InputsDonationsProps, TitleValueProps } from '@/app/types/types';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { InputsDonationsProps, TitleValueProps } from '@/app/types/types';
 export default function FormDonations({ title, value, searchDonationCod, searchDonorResult }: TitleValueProps) {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const onSubmit: SubmitHandler<InputsDonationsProps> = async (data: any) => {

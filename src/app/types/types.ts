@@ -40,13 +40,6 @@ export type FormFullValues = {
         referencepoint: string;
     } | any;
 };
-export type AlertMessageState = {
-    message?: string;
-    Error: boolean;
-    page?: string;
-    clickDonation?: boolean;
-    onClose?: () => void;
-};
 export type Inputs = {
     model?: string;
     chassi?: string;

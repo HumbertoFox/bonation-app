@@ -5,13 +5,11 @@ import { SearchDriver } from '@/app/api/actions/search_driver';
 import { SearchHelper } from '@/app/api/actions/search_helper';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { AlertMessageState, FormSearch, InputSearch } from '@/app/types/types';
-import AlertMessage from '../alert/alert';
+import { FormSearch, InputSearch } from '@/app/types/types';
+import Swal from 'sweetalert2';
 export default function FormSearchs({ search, searchDonorCodTel }: FormSearch) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [codTelSearch, setCodTelSearch] = useState<any>('');
-    const [alertMsg, setAlertMsg] = useState<AlertMessageState | null>(null);
-    const handleEventAlertClose = () => setAlertMsg(null);
     const onSubmit: SubmitHandler<InputSearch> = async (data: any) => {
         try {
             const formData = new FormData();
@@ -35,15 +33,27 @@ export default function FormSearchs({ search, searchDonorCodTel }: FormSearch) {
             };
             if (response?.Error === false) {
                 setCodTelSearch(response);
-                setAlertMsg(response);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuário Encontrado!',
+                    text: response.message,
+                    confirmButtonText: 'OK'
+                });
             } else if (response?.Error === true) {
-                setAlertMsg(response);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: response.message,
+                    confirmButtonText: 'OK'
+                });
             };
         } catch (error) {
             console.error('Erro ao Conectar ao Banco:', error);
-            setAlertMsg({
-                Error: true,
-                message: 'Erro ao Conectar ao Banco!'
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Erro ao Conectar ao Banco!',
+                confirmButtonText: 'OK'
             });
         };
     };
@@ -139,9 +149,6 @@ export default function FormSearchs({ search, searchDonorCodTel }: FormSearch) {
                         />
                     </div>
                 </div>
-            )}
-            {alertMsg && (
-                <AlertMessage {...alertMsg} onClose={handleEventAlertClose} />
             )}
         </form>
     );

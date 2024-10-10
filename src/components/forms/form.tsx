@@ -11,8 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { AlertMessageState, FormFullValues, Inputs } from '@/app/types/types';
-import AlertMessage from '../alert/alert';
+import { FormFullValues, Inputs } from '@/app/types/types';
+import Swal from 'sweetalert2';
 export default function FormFull({ title, value, page, subpage, searchDonorCodTel }: FormFullValues) {
     const { register, handleSubmit, setValue, setFocus, setError, watch, reset, formState: { errors } } = useForm();
     const router = useRouter();
@@ -23,7 +23,6 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
     const [age, setAge] = useState<number>(0);
     const [ispassword, setIspassword] = useState<boolean>(false);
     const [ispasswordchecked, setIspasswordchecked] = useState<boolean>(false);
-    const [alertMsg, setAlertMsg] = useState<AlertMessageState | null>(null);
     const swapRadioSelectHbe = (element: ChangeEvent<HTMLInputElement>) => {
         const selectValue = element.target.value;
         setRadioSelectHbe(selectValue);
@@ -32,7 +31,6 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
         const selectValue = element.target.value;
         setRadioSelectIsBloking(selectValue);
     };
-    const handleEventAlertClose = () => setAlertMsg(null);
     const getCheckedCpf = (data: string) => {
         const isRepeatedCpf = (cpf: string) => {
             const firstDigit = cpf[0];
@@ -87,9 +85,11 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
         if (!element.target.value) {
             clearZipCode();
             setFocus('email');
-            setAlertMsg({
-                Error: true,
-                message: 'Formato de CEP inválido!'
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Formato de CEP inválido!',
+                confirmButtonText: 'OK'
             });
             return;
         };
@@ -106,26 +106,32 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                 } else {
                     clearZipCode();
                     setFocus('email');
-                    setAlertMsg({
-                        Error: true,
-                        message: 'CEP não encontrado!'
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: 'CEP não encontrado!',
+                        confirmButtonText: 'OK'
                     });
                 }
             } else {
                 clearZipCode();
                 setFocus('email');
-                setAlertMsg({
-                    Error: true,
-                    message: 'Formato de CEP inválido!'
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Formato de CEP inválido!',
+                    confirmButtonText: 'OK'
                 });
             }
         } catch (error) {
             console.error(error);
             clearZipCode();
             setFocus('email');
-            setAlertMsg({
-                Error: true,
-                message: 'Formato de CEP inválido ou não encontrado!'
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Formato de CEP inválido ou não encontrado!',
+                confirmButtonText: 'OK'
             });
             return;
         };
@@ -169,40 +175,68 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                     setTimeout(() => {
                         router.push('/dashboard');
                     }, 3000);
-                    setAlertMsg(response);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
                 } else if (response?.Error === true) {
-                    setAlertMsg(response);
                     setTimeout(() => {
                         window.location.reload();
                     }, 3000);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
                 };
             } else {
                 if (response?.Error === false) {
                     reset();
-                    setAlertMsg(response);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: response.message,
+                        confirmButtonText: 'OK'
+                    });
                     goToDonation && setTimeout(() => {
                         localStorage.setItem('activeMenuLinkSelection', 'RegisterDonation');
                         router.push('registerdonation');
                     }, 1000);
                 } else if (response?.Error === true) {
-                    setAlertMsg(response);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: response.message,
+                        confirmButtonText: 'OK'
+                    });
                 };
             };
         } catch (error) {
             if (subpage === 'Login') {
-                console.error('Erro ao Conectar ao Banco:', error);
-                setAlertMsg({
-                    Error: true,
-                    message: 'Erro ao Conectar ao Banco!'
+                console.error('Erro ao Conectar com o Banco:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Erro ao Conectar com o Banco!',
+                    confirmButtonText: 'OK'
                 });
                 setTimeout(() => {
                     window.location.reload();
                 }, 3000);
             } else {
                 console.error('Erro ao Conectar ao Banco:', error);
-                setAlertMsg({
-                    Error: true,
-                    message: 'Erro ao Conectar ao Banco!'
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Erro ao Conectar com o Banco!',
+                    confirmButtonText: 'OK'
                 });
             };
         };
@@ -557,9 +591,6 @@ export default function FormFull({ title, value, page, subpage, searchDonorCodTe
                         </button>
                     )}
                 </div>
-            )}
-            {alertMsg && (
-                <AlertMessage {...alertMsg} page={page} clickDonation={goToDonation} onClose={handleEventAlertClose} />
             )}
         </form>
     );
